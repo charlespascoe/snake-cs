@@ -34,7 +34,11 @@ namespace Snake {
             Console.Clear();
         }
 
-        public void SetBlock(int x, int y, char c) {
+        public void SetCell(Vector v, char c) {
+            this.SetCell(v.X, v.Y, c);
+        }
+
+        public void SetCell(int x, int y, char c) {
             if ((int)c > 0 && x >= 0 && y >= 0 && x < this.Width && y < this.Width) {
                 Console.SetCursorPosition(x, y);
                 Console.Write(c);
