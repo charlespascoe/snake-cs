@@ -5,6 +5,8 @@ namespace Snake {
         public int X { get; set; }
         public int Y { get; set; }
 
+        public Vector() : this(0, 0) {}
+
         public Vector(int x, int y) {
             this.X = x;
             this.Y = y;
