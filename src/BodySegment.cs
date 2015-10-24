@@ -2,7 +2,7 @@ using System;
 
 namespace Snake {
     public class BodySegment : IDrawable {
-        public Vector position = new Vector(0, 0);
+        public Vector Position { get; set; }
 
         public char BodyChar { get; set; }
         public ConsoleColor Foreground { get; set; }
@@ -12,13 +12,14 @@ namespace Snake {
             this.BodyChar = ' ';
             this.Foreground = ConsoleColor.White;
             this.Background = ConsoleColor.Green;
+            this.Position = new Vector();
         }
 
         public virtual void Update() {
         }
 
         public virtual void Draw(Screen screen, Vector parentPos) {
-            screen.SetCell(parentPos + this.position, this.BodyChar, this.Foreground, this.Background);
+            screen.SetCell(parentPos + this.Position, this.BodyChar, this.Foreground, this.Background);
         }
     }
 }
