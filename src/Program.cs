@@ -4,16 +4,11 @@ using System.Threading;
 namespace Snake {
     public class Program {
         public static void Main(string[] args) {
-            Console.CursorVisible = false;
-            int pos = 0;
-            while (true) {
-                Console.Clear();
-                Console.SetCursorPosition(pos, pos);
-                Console.Write('X');
+            SnakeBody s = new SnakeBody();
 
-                pos = (pos + 1) % Console.WindowHeight;
-                Thread.Sleep(50);
-            }
+            Screen screen = new Screen();
+
+            s.Draw(screen, new Vector(0, 0));
         }
     }
 }
