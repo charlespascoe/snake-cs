@@ -11,12 +11,7 @@ namespace Snake {
         public ConsoleColor borderBackground;
         public ConsoleColor borderForeground;
 
-        protected char topLeftCorner = (char)0x2554;
-        protected char bottomLeftCorner = (char)0x255A;
-        protected char topRightCorner = (char)0x2557;
-        protected char bottomRightCorner = (char)0x255D;
-        protected char horizontalBar = (char)0x2550;
-        protected char verticalBar = (char)0x2551;
+        public BoxStyle Style { get; set; }
 
         public Box() {
 
@@ -40,7 +35,7 @@ namespace Snake {
                     char cell = ' ';
                     ConsoleColor b = this.background;
                     ConsoleColor f = this.background;
-                    if (this.IsBorder(x, y)) {
+                    if (this.HasBorder && this.IsBorder(x, y)) {
                         cell = this.GetBorderCell(x, y);
                         b = borderBackground;
                         f = borderForeground;
@@ -55,26 +50,28 @@ namespace Snake {
         }
 
         private char GetBorderCell(int x, int y) {
+            if (this.Style == null) return ' ';
+
             if (x == 0) {
                 if (y == 0) {
-                    return topLeftCorner;
+                    return this.Style.TopLeftCorner;
                 } else if (y == this.size.Y - 1) {
-                    return bottomLeftCorner;
+                    return this.Style.BottomLeftCorner;
                 }
             } else if (x == this.size.X - 1) {
                 if (y == 0) {
-                    return topRightCorner;
+                    return this.Style.TopRightCorner;
                 } else if (y == this.size.Y - 1) {
-                    return bottomRightCorner;
+                    return this.Style.BottomRightCorner;
                 }
             }
 
             if (y == 0 || y == this.size.Y - 1) {
-                return horizontalBar;
+                return this.Style.HorizontalBar;
             }
 
             if (x == 0 || x == this.size.X - 1) {
-                return verticalBar;
+                return this.Style.VerticalBar;
             }
 
             return (char)0;
