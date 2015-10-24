@@ -8,6 +8,8 @@ namespace Snake {
         public override char BottomRightCorner { get { return (char)0x255D; } }
         public override char HorizontalBar { get { return (char)0x2550; } }
         public override char VerticalBar { get { return (char)0x2551; } }
+
+        public DoubleLineBoxStyle() : base() { }
     }
 }
 

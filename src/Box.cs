@@ -7,10 +7,6 @@ namespace Snake {
 
         public bool HasBorder { get; set; }
 
-        public ConsoleColor Background { get; set; }
-        public ConsoleColor BorderBackground { get; set; }
-        public ConsoleColor BorderForeground { get; set; }
-
         public BoxStyle Style { get; set; }
 
         public Box() {
@@ -33,12 +29,12 @@ namespace Snake {
             for (int x = 0; x < this.Size.X; x++) {
                 for (int y = 0; y < this.Size.Y; y++) {
                     char cell = ' ';
-                    ConsoleColor b = this.Background;
-                    ConsoleColor f = this.Background;
+                    ConsoleColor b = this.Style.Background;
+                    ConsoleColor f = this.Style.Foreground;
                     if (this.HasBorder && this.IsBorder(x, y)) {
                         cell = this.GetBorderCell(x, y);
-                        b = this.BorderBackground;
-                        f = this.BorderForeground;
+                        b = this.Style.BorderBackground;
+                        f = this.Style.BorderForeground;
                     }
                     screen.SetCell(parentPos + this.Position + new Vector(x, y), cell, f, b);
                 }
