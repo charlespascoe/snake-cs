@@ -32,9 +32,9 @@ namespace Snake {
         }
 
         public void AfterDraw() {
-            this.previousCharacter = this.character;
-            this.previousForeground = this.foreground;
-            this.previousBackground = this.background;
+            this.previousCharacter = this.Character;
+            this.previousForeground = this.Foreground;
+            this.previousBackground = this.Background;
         }
     }
 }

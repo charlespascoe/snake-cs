@@ -60,9 +60,9 @@ namespace Snake {
         public void SetCell(int x, int y, char c, ConsoleColor f, ConsoleColor b) {
             if ((int)c > 0 && x >= 0 && y >= 0 && x < this.Width && y < this.Height) {
                 Cell cell = this.buffer[x, y];
-                cell.character = c;
-                cell.foreground = f;
-                cell.background = b;
+                cell.Character = c;
+                cell.Foreground = f;
+                cell.Background = b;
             }
         }
 
@@ -88,11 +88,11 @@ namespace Snake {
                 for (int x = 0; x < this.Width; x++) {
                     Cell cell = this.buffer[x, y];
 
-                    if (cell.foreground == this.DefaultBackground && cell.background == this.DefaultBackground) {
+                    if (cell.Foreground == this.DefaultBackground && cell.Background == this.DefaultBackground) {
                         cell.AfterDraw();
                     }
 
-                    row[x] = cell.character;
+                    row[x] = cell.Character;
                 }
                 Console.Write(row);
             }
@@ -103,10 +103,10 @@ namespace Snake {
                 for (int x = 0; x < this.Width; x++) {
                     Cell cell = this.buffer[x, y];
                     if (cell.HasChanged) {
-                        Console.ForegroundColor = cell.foreground;
-                        Console.BackgroundColor = cell.background;
+                        Console.ForegroundColor = cell.Foreground;
+                        Console.BackgroundColor = cell.Background;
                         Console.SetCursorPosition(x, y);
-                        Console.Write(cell.character);
+                        Console.Write(cell.Character);
                         cell.AfterDraw();
                     }
                 }

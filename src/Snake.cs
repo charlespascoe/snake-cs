@@ -8,22 +8,22 @@ namespace Snake {
         private List<BodySegment> body = new List<BodySegment>();
 
         public SnakeBody() {
-            this.head.position.X = 10;
-            this.head.position.Y = 10;
-            this.tail.position.X = 6;
-            this.tail.position.Y = 10;
+            this.head.Position.X = 10;
+            this.head.Position.Y = 10;
+            this.tail.Position.X = 6;
+            this.tail.Position.Y = 10;
 
             BodySegment b1 = new BodySegment();
-            b1.position.X = 9;
-            b1.position.Y = 10;
+            b1.Position.X = 9;
+            b1.Position.Y = 10;
 
             BodySegment b2 = new BodySegment();
-            b2.position.X = 8;
-            b2.position.Y = 10;
+            b2.Position.X = 8;
+            b2.Position.Y = 10;
 
             BodySegment b3 = new BodySegment();
-            b3.position.X = 7;
-            b3.position.Y = 10;
+            b3.Position.X = 7;
+            b3.Position.Y = 10;
 
             this.body.Add(b1);
             this.body.Add(b2);
