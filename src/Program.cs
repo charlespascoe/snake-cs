@@ -7,7 +7,7 @@ using Snake.UI;
 namespace Snake {
     public class Program {
         public static void Main(string[] args) {
-            SnakeBody s = new SnakeBody();
+            SnakeBody s = new SnakeBody(1);
             Box b = new Box(30, 30, 20, 3);
             b.Style = new RoundedBoxStyle();
             b.HasBorder = true;
@@ -15,6 +15,11 @@ namespace Snake {
             // b.borderBackground = ConsoleColor.DarkBlue;
             b.Style.BorderForeground = ConsoleColor.Yellow;
 
+            Box background = new Box(0, 0, 100, 50);
+            background.Style = new BoxStyle();
+            background.Style.Background = ConsoleColor.Black;
+
+            s.GameAreaSize = background.Size;
 
             Button button = new Button(50, 30, 20, 3, "Test");
             button.Style = new RoundedBoxStyle();
@@ -24,6 +29,8 @@ namespace Snake {
 
 
             Screen screen = new Screen();
+            screen.DefaultForeground = ConsoleColor.White;
+            screen.DefaultBackground = ConsoleColor.Black;
 
             List<string> ts = new List<string>();
 
@@ -31,8 +38,10 @@ namespace Snake {
                 DateTime start = DateTime.Now;
                 UserInput.Update();
                 s.Update();
-                s.Draw(screen, new Vector(0, 0));
-                b.Draw(screen, new Vector(0, 0));
+
+                background.Draw(screen, new Vector());
+                s.Draw(screen, new Vector());
+                b.Draw(screen, new Vector());
                 button.Draw(screen, new Vector());
 
                 if (UserInput.KeyPressed) {
@@ -52,7 +61,7 @@ namespace Snake {
 
                 ts.Add(t1.Milliseconds.ToString() + " " + t2.Milliseconds.ToString());
 
-                int timeout = 50 - t2.Milliseconds;
+                int timeout = 25 - t2.Milliseconds;
 
                 if (timeout < 0) timeout = 0;
                 Thread.Sleep(timeout);
