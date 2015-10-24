@@ -8,7 +8,14 @@ namespace Snake {
 
             Screen screen = new Screen();
 
-            s.Draw(screen, new Vector(0, 0));
+            for (int i = 0; i < 10; i++) {
+                screen.Clear();
+                s.Draw(screen, new Vector(i, 0));
+                screen.Draw();
+                Thread.Sleep(500);
+            }
+
+            Thread.Sleep(5000);
         }
     }
 }
