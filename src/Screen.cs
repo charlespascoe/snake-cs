@@ -46,15 +46,17 @@ namespace Snake {
         }
 
         public void SetCell(Vector v, char c) {
-            this.SetCell(v, c, this.DefaultForeground, this.DefaultBackground);
+            this.SetCell(v.X, v.Y, c);
+        }
+
+        public void SetCell(int x, int y, char c) {
+            if ((int)c > 0 && x >= 0 && y >= 0 && x < this.Width && y < this.Height) {
+                this.buffer[x, y].Character = c;
+            }
         }
 
         public void SetCell(Vector v, char c, ConsoleColor f, ConsoleColor b) {
             this.SetCell(v.X, v.Y, c, f, b);
-        }
-
-        public void SetCell(int x, int y, char c) {
-            this.SetCell(x, y, c, this.DefaultForeground, this.DefaultBackground);
         }
 
         public void SetCell(int x, int y, char c, ConsoleColor f, ConsoleColor b) {
