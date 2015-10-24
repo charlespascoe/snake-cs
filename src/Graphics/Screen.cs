@@ -14,7 +14,9 @@ namespace Snake.Graphics {
         public ConsoleColor DefaultForeground { get; set; }
         public ConsoleColor DefaultBackground { get; set; }
 
-        public Screen() : this(Console.WindowWidth, Console.WindowHeight) {
+        // Subtract 1, because when the cursor writes the last line,
+        // it will go to the next line, pushing everything up by 1
+        public Screen() : this(Console.WindowWidth, Console.WindowHeight - 1) {
         }
 
         private Cell[,] buffer;
@@ -85,8 +87,8 @@ namespace Snake.Graphics {
             Console.ForegroundColor = this.DefaultForeground;
             Console.BackgroundColor = this.DefaultBackground;
 
+            char[] row = new char[this.Width];
             for (int y = 0; y < this.Height; y++) {
-                char[] row = new char[this.Width];
                 for (int x = 0; x < this.Width; x++) {
                     Cell cell = this.buffer[x, y];
 
