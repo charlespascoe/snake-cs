@@ -11,10 +11,15 @@ namespace Snake {
 
         public Direction MoveDirection { get; set; }
 
-        private int ticksBetweenMoves = 10;
-        private int ticksUntilNextMove = 10;
+        private int ticksBetweenMoves;
+        private int ticksUntilNextMove;
 
-        public SnakeBody() {
+        public Vector GameAreaSize { get; set; }
+
+        public SnakeBody(int startSpeed) {
+            ticksBetweenMoves = startSpeed;
+            ticksUntilNextMove = ticksBetweenMoves;
+
             this.head.Position.X = 10;
             this.head.Position.Y = 10;
             this.tail.Position.X = 6;
@@ -55,6 +60,8 @@ namespace Snake {
                         this.MoveDirection = Direction.Right;
                         break;
                 }
+
+                this.head.HeadDirection = this.MoveDirection;
             }
 
             if (ticksUntilNextMove <= 0) {
@@ -66,7 +73,7 @@ namespace Snake {
         public void Move() {
             Vector oldHeadPos = this.head.Position;
 
-            this.head.Position += this.MoveDirection.ToVector();
+            this.head.Position =  (this.head.Position + this.MoveDirection.ToVector()) % this.GameAreaSize;
 
             BodySegment b = this.body.Pop();
 
