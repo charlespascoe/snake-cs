@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 using Snake.Graphics;
+using Snake.UI;
 
 namespace Snake {
     public class Program {
@@ -26,14 +27,24 @@ namespace Snake {
 
             List<string> ts = new List<string>();
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000; i++) {
                 DateTime start = DateTime.Now;
-                s.Draw(screen, new Vector(i, 0));
+                UserInput.Update();
+                s.Update();
+                s.Draw(screen, new Vector(0, 0));
                 b.Draw(screen, new Vector(0, 0));
                 button.Draw(screen, new Vector());
+
+                if (UserInput.KeyPressed) {
+                    screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Blue);
+                    screen.SetCell(2, 0, (int)UserInput.KeyChar == 0 ? '0' : ' ', ConsoleColor.White, ConsoleColor.Blue);
+                    screen.SetCell(1, 0, UserInput.Key == ConsoleKey.Enter ? '#' : ' ', ConsoleColor.White, ConsoleColor.Black);
+                } else {
+                    screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Black);
+                }
+
                 TimeSpan t1 = DateTime.Now - start;
                 if (screen.GetChangedCount() > 500) {
-                    Console.SetCursorPosition(1, 0);
                     screen.DrawAll();
                 }
                 screen.Draw();
@@ -52,6 +63,8 @@ namespace Snake {
             foreach (string t in ts) {
                 Console.WriteLine(t);
             }
+
+            screen.CursorVisible = true;
         }
     }
 }
