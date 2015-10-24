@@ -1,15 +1,26 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using Snake.Graphics;
 
 namespace Snake {
     public class Program {
         public static void Main(string[] args) {
             SnakeBody s = new SnakeBody();
-            Box b = new Box(30, 30, 10, 3);
-            b.background = ConsoleColor.Blue;
+            Box b = new Box(30, 30, 20, 3);
+            b.Style = new RoundedBoxStyle();
+            b.HasBorder = true;
+            b.Style.Background = ConsoleColor.Blue;
             // b.borderBackground = ConsoleColor.DarkBlue;
-            b.borderForeground = ConsoleColor.Yellow;
+            b.Style.BorderForeground = ConsoleColor.Yellow;
+
+
+            Button button = new Button(50, 30, 20, 3, "Test");
+            button.Style = new RoundedBoxStyle();
+            button.HasBorder = true;
+            button.Style.BorderForeground = ConsoleColor.Yellow;
+            button.IsFocussed = true;
+
 
             Screen screen = new Screen();
 
@@ -19,7 +30,12 @@ namespace Snake {
                 DateTime start = DateTime.Now;
                 s.Draw(screen, new Vector(i, 0));
                 b.Draw(screen, new Vector(0, 0));
+                button.Draw(screen, new Vector());
                 TimeSpan t1 = DateTime.Now - start;
+                if (screen.GetChangedCount() > 500) {
+                    Console.SetCursorPosition(1, 0);
+                    screen.DrawAll();
+                }
                 screen.Draw();
                 TimeSpan t2 = DateTime.Now - start;
 
@@ -30,6 +46,8 @@ namespace Snake {
                 if (timeout < 0) timeout = 0;
                 Thread.Sleep(timeout);
             }
+
+            Console.SetCursorPosition(0, Console.WindowHeight - 1);
 
             foreach (string t in ts) {
                 Console.WriteLine(t);

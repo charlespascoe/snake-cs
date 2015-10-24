@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public class Screen {
         public bool CursorVisible {
             get { return Console.CursorVisible; }

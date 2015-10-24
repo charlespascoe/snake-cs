@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Snake.Graphics;
 
 namespace Snake {
     public class SnakeBody : IDrawable {

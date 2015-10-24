@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public class RoundedBoxStyle : BoxStyle {
         public override char TopLeftCorner { get { return (char)0x256D; } }
         public override char BottomLeftCorner { get { return (char)0x2570; } }

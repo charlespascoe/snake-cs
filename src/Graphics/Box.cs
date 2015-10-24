@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public class Box : IDrawable {
         public Vector Position { get; set; }
         public Vector Size { get; set; }

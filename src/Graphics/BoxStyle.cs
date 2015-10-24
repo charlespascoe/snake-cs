@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public class BoxStyle {
         public virtual char TopLeftCorner { get { return ' '; } }
         public virtual char BottomLeftCorner { get { return ' '; } }

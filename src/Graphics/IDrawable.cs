@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public interface IDrawable {
         void Update();
 

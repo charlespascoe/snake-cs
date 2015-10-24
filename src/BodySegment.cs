@@ -1,4 +1,5 @@
 using System;
+using Snake.Graphics;
 
 namespace Snake {
     public class BodySegment : IDrawable {

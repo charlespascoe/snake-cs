@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public class Cell {
         public char Character { get; set; }
         public ConsoleColor Foreground { get; set; }

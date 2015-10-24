@@ -1,6 +1,6 @@
 using System;
 
-namespace Snake {
+namespace Snake.Graphics {
     public class DoubleLineBoxStyle : BoxStyle {
         public override char TopLeftCorner { get { return (char)0x2554; } }
         public override char BottomLeftCorner { get { return (char)0x255A; } }
