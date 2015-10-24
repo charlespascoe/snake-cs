@@ -21,7 +21,13 @@ namespace Snake.Graphics {
         }
 
         public static Vector operator %(Vector v1, Vector v2) {
-            return new Vector(v1.X % v2.X, v1.Y % v2.Y);
+            int x = v1.X % v2.X;
+            if (x < 0) x += v2.X;
+
+            int y = v1.Y % v2.Y;
+            if (y < 0) y += v2.Y;
+
+            return new Vector(x, y);
         }
     }
 }
