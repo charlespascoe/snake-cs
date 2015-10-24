@@ -39,7 +39,7 @@ namespace Snake {
         public void Clear() {
             for (int x = 0; x < this.Width; x++) {
                 for (int y = 0; y < this.Height; y++) {
-                    this.buffer[x, y] = new Cell();
+                    this.buffer[x, y] = new Cell(' ', this.DefaultForeground, this.DefaultBackground);
                 }
             }
             Console.Clear();
@@ -66,15 +66,48 @@ namespace Snake {
             }
         }
 
-        public void Draw() {
+        public int GetChangedCount() {
+            int changed = 0;
             for (int x = 0; x < this.Width; x++) {
                 for (int y = 0; y < this.Height; y++) {
+                    if (this.buffer[x, y].HasChanged) {
+                        changed++;
+                    }
+                }
+            }
+            return changed;
+        }
+
+        public void DrawAll() {
+            Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = this.DefaultForeground;
+            Console.BackgroundColor = this.DefaultBackground;
+
+            for (int y = 0; y < this.Height; y++) {
+                char[] row = new char[this.Width];
+                for (int x = 0; x < this.Width; x++) {
+                    Cell cell = this.buffer[x, y];
+
+                    if (cell.foreground == this.DefaultBackground && cell.background == this.DefaultBackground) {
+                        cell.AfterDraw();
+                    }
+
+                    row[x] = cell.character;
+                }
+                Console.Write(row);
+            }
+        }
+
+        public void Draw() {
+            for (int y = 0; y < this.Height; y++) {
+                for (int x = 0; x < this.Width; x++) {
                     Cell cell = this.buffer[x, y];
                     if (cell.HasChanged) {
                         Console.ForegroundColor = cell.foreground;
                         Console.BackgroundColor = cell.background;
                         Console.SetCursorPosition(x, y);
                         Console.Write(cell.character);
+                        cell.AfterDraw();
                     }
                 }
             }
