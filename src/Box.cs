@@ -2,14 +2,14 @@ using System;
 
 namespace Snake {
     public class Box : IDrawable {
-        public Vector position;
-        public Vector size;
+        public Vector Position { get; set; }
+        public Vector Size { get; set; }
 
         public bool HasBorder { get; set; }
 
-        public ConsoleColor background;
-        public ConsoleColor borderBackground;
-        public ConsoleColor borderForeground;
+        public ConsoleColor Background { get; set; }
+        public ConsoleColor BorderBackground { get; set; }
+        public ConsoleColor BorderForeground { get; set; }
 
         public BoxStyle Style { get; set; }
 
@@ -21,32 +21,32 @@ namespace Snake {
             if (width < 0) width = 0;
             if (height < 0) height = 0;
 
-            this.position = new Vector(x, y);
-            this.size = new Vector(width, height);
+            this.Position = new Vector(x, y);
+            this.Size = new Vector(width, height);
         }
 
         public virtual void Update() {}
 
         public virtual void Draw(Screen screen, Vector parentPos) {
-            if (this.size.X <= 0 || this.size.Y <= 0) return;
+            if (this.Size.X <= 0 || this.Size.Y <= 0) return;
 
-            for (int x = 0; x < this.size.X; x++) {
-                for (int y = 0; y < this.size.Y; y++) {
+            for (int x = 0; x < this.Size.X; x++) {
+                for (int y = 0; y < this.Size.Y; y++) {
                     char cell = ' ';
-                    ConsoleColor b = this.background;
-                    ConsoleColor f = this.background;
+                    ConsoleColor b = this.Background;
+                    ConsoleColor f = this.Background;
                     if (this.HasBorder && this.IsBorder(x, y)) {
                         cell = this.GetBorderCell(x, y);
-                        b = borderBackground;
-                        f = borderForeground;
+                        b = this.BorderBackground;
+                        f = this.BorderForeground;
                     }
-                    screen.SetCell(parentPos + this.position + new Vector(x, y), cell, f, b);
+                    screen.SetCell(parentPos + this.Position + new Vector(x, y), cell, f, b);
                 }
             }
         }
 
         private bool IsBorder(int x, int y) {
-            return x == 0 || y == 0 || x == this.size.X - 1 || y == this.size.Y - 1;
+            return x == 0 || y == 0 || x == this.Size.X - 1 || y == this.Size.Y - 1;
         }
 
         private char GetBorderCell(int x, int y) {
@@ -55,22 +55,22 @@ namespace Snake {
             if (x == 0) {
                 if (y == 0) {
                     return this.Style.TopLeftCorner;
-                } else if (y == this.size.Y - 1) {
+                } else if (y == this.Size.Y - 1) {
                     return this.Style.BottomLeftCorner;
                 }
-            } else if (x == this.size.X - 1) {
+            } else if (x == this.Size.X - 1) {
                 if (y == 0) {
                     return this.Style.TopRightCorner;
-                } else if (y == this.size.Y - 1) {
+                } else if (y == this.Size.Y - 1) {
                     return this.Style.BottomRightCorner;
                 }
             }
 
-            if (y == 0 || y == this.size.Y - 1) {
+            if (y == 0 || y == this.Size.Y - 1) {
                 return this.Style.HorizontalBar;
             }
 
-            if (x == 0 || x == this.size.X - 1) {
+            if (x == 0 || x == this.Size.X - 1) {
                 return this.Style.VerticalBar;
             }
 
