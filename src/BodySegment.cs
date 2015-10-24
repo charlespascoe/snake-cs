@@ -18,9 +18,7 @@ namespace Snake {
         }
 
         public virtual void Draw(Screen screen, Vector parentPos) {
-            screen.Foreground = this.Foreground;
-            screen.Background = this.Background;
-            screen.SetCell(parentPos + this.position, this.BodyChar);
+            screen.SetCell(parentPos + this.position, this.BodyChar, this.Foreground, this.Background);
         }
     }
 }
