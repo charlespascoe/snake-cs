@@ -81,9 +81,8 @@ namespace Snake {
                 b.Draw(screen, parentPos);
             }
 
-            head.Draw(screen, parentPos);
             tail.Draw(screen, parentPos);
-            screen.SetCell(screen.Width - 1, screen.Height - 1, ' ');
+            head.Draw(screen, parentPos);
         }
     }
 }
