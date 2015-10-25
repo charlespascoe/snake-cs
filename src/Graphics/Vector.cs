@@ -7,6 +7,8 @@ namespace Snake.Graphics {
 
         public Vector() : this(0, 0) {}
 
+        public Vector(Vector v) : this(v.X, v.Y) {}
+
         public Vector(int x, int y) {
             this.X = x;
             this.Y = y;
