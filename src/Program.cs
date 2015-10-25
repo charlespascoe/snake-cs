@@ -53,9 +53,6 @@ namespace Snake {
                 }
 
                 TimeSpan t1 = DateTime.Now - start;
-                if (screen.GetChangedCount() > 500) {
-                    screen.DrawAll();
-                }
                 screen.Draw();
                 TimeSpan t2 = DateTime.Now - start;
 

@@ -22,6 +22,8 @@ namespace Snake.Graphics {
 
         private Cell[,] buffer;
 
+        private int drawChangedThreshold = 100;
+
         public Screen(int width, int height) {
             if (width < 0 || height < 0) {
                 throw new ArgumentOutOfRangeException("width and height must be greater than 0");
@@ -115,6 +117,11 @@ namespace Snake.Graphics {
         }
 
         public void Draw() {
+            if (this.GetChangedCount() > this.drawChangedThreshold) {
+                this.DrawAll();
+                return;
+            }
+
             for (int y = 0; y < this.Height; y++) {
                 for (int x = 0; x < this.Width; x++) {
                     Cell cell = this.buffer[x, y];
