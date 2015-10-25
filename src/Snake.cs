@@ -20,22 +20,22 @@ namespace Snake {
             ticksBetweenMoves = startSpeed;
             ticksUntilNextMove = ticksBetweenMoves;
 
-            this.head.Position.X = 10;
-            this.head.Position.Y = 10;
-            this.tail.Position.X = 6;
-            this.tail.Position.Y = 10;
+            this.head.GamePosition.X = 10;
+            this.head.GamePosition.Y = 10;
+            this.tail.GamePosition.X = 6;
+            this.tail.GamePosition.Y = 10;
 
             BodySegment b1 = new BodySegment();
-            b1.Position.X = 9;
-            b1.Position.Y = 10;
+            b1.GamePosition.X = 9;
+            b1.GamePosition.Y = 10;
 
             BodySegment b2 = new BodySegment();
-            b2.Position.X = 8;
-            b2.Position.Y = 10;
+            b2.GamePosition.X = 8;
+            b2.GamePosition.Y = 10;
 
             BodySegment b3 = new BodySegment();
-            b3.Position.X = 7;
-            b3.Position.Y = 10;
+            b3.GamePosition.X = 7;
+            b3.GamePosition.Y = 10;
 
             this.body.Add(b1);
             this.body.Add(b2);
@@ -71,15 +71,15 @@ namespace Snake {
         }
 
         public void Move() {
-            Vector oldHeadPos = this.head.Position;
+            Vector oldHeadPos = this.head.GamePosition;
 
-            this.head.Position =  (this.head.Position + this.MoveDirection.ToVector()) % this.GameAreaSize;
+            this.head.GamePosition =  (this.head.GamePosition + this.MoveDirection.ToVector()) % this.GameAreaSize;
 
             BodySegment b = this.body.Pop();
 
-            this.tail.Position = b.Position;
+            this.tail.GamePosition = b.GamePosition;
 
-            b.Position = oldHeadPos;
+            b.GamePosition = oldHeadPos;
             this.body.Insert(0, b);
         }
 

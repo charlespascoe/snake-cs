@@ -7,28 +7,36 @@ namespace Snake {
             get { return this._HeadDirection; }
             set {
                 this._HeadDirection = value;
-
-                switch (value) {
-                    case Direction.Up:
-                        this.BodyChar = 'v';
-                        break;
-                    case Direction.Left:
-                        this.BodyChar = '>';
-                        break;
-                    case Direction.Down:
-                        this.BodyChar = '^';
-                        break;
-                    case Direction.Right:
-                        this.BodyChar = '<';
-                        break;
-                }
+                this.UpdateHeadDirection();
             }
         }
 
-        public Head() {
-            this.BodyChar = '<';
+        public Head() : base() {
+            this.HeadDirection = Direction.Up;
             this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.DarkGreen;
+            this.Background = ConsoleColor.Green;
+        }
+
+        private void UpdateHeadDirection() {
+            switch (this._HeadDirection) {
+                case Direction.Up:
+                    // Unicode 'Dot Above'
+                    this.BodyCharRight = (char)0x02D9;
+                    this.BodyCharLeft = this.BodyCharRight;
+                    break;
+                case Direction.Left:
+                    this.BodyCharRight = ' ';
+                    this.BodyCharLeft = ':';
+                    break;
+                case Direction.Down:
+                    this.BodyCharRight = '.';
+                    this.BodyCharLeft = '.';
+                    break;
+                case Direction.Right:
+                    this.BodyCharRight = ':';
+                    this.BodyCharLeft = ' ';
+                    break;
+            }
         }
     }
 }

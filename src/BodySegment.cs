@@ -3,24 +3,29 @@ using Snake.Graphics;
 
 namespace Snake {
     public class BodySegment : IDrawable {
-        public Vector Position { get; set; }
+        public Vector GamePosition { get; set; }
 
-        public char BodyChar { get; set; }
+        public char BodyCharRight { get; set; }
+        public char BodyCharLeft { get; set; }
         public ConsoleColor Foreground { get; set; }
         public ConsoleColor Background { get; set; }
 
         public BodySegment() {
-            this.BodyChar = ' ';
+            this.BodyCharRight = ' ';
+            this.BodyCharLeft = ' ';
             this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.Green;
-            this.Position = new Vector();
+            this.Background = ConsoleColor.Cyan;
+            this.GamePosition = new Vector();
         }
 
         public virtual void Update() {
         }
 
         public virtual void Draw(Screen screen, Vector parentPos) {
-            screen.SetCell(parentPos + this.Position, this.BodyChar, this.Foreground, this.Background);
+            Vector screenPosition = parentPos + new Vector(this.GamePosition.X * 2, this.GamePosition.Y);
+
+            screen.SetCell(screenPosition, this.BodyCharLeft, this.Foreground, this.Background);
+            screen.SetCell(screenPosition + new Vector(1, 0), this.BodyCharRight, this.Foreground, this.Background);
         }
     }
 }

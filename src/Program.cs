@@ -7,7 +7,7 @@ using Snake.UI;
 namespace Snake {
     public class Program {
         public static void Main(string[] args) {
-            SnakeBody s = new SnakeBody(1);
+            SnakeBody s = new SnakeBody(5);
             Box b = new Box(30, 30, 20, 3);
             b.Style = new RoundedBoxStyle();
             b.HasBorder = true;
@@ -19,7 +19,7 @@ namespace Snake {
             background.Style = new BoxStyle();
             background.Style.Background = ConsoleColor.Black;
 
-            s.GameAreaSize = background.Size;
+            s.GameAreaSize = new Vector(background.Size.X / 2, background.Size.Y);
 
             Button button = new Button(50, 30, 20, 3, "Test");
             button.Style = new RoundedBoxStyle();
