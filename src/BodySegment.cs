@@ -2,8 +2,8 @@ using System;
 using Snake.Graphics;
 
 namespace Snake {
-    public class BodySegment : IDrawable {
-        public Vector GamePosition { get; set; }
+    public class BodySegment : GameEntity {
+        public override Vector GamePosition { get; set; }
 
         public char BodyCharRight { get; set; }
         public char BodyCharLeft { get; set; }
@@ -18,10 +18,10 @@ namespace Snake {
             this.GamePosition = new Vector();
         }
 
-        public virtual void Update() {
+        public override void Update() {
         }
 
-        public virtual void Draw(Screen screen, Vector parentPos) {
+        public override void Draw(Screen screen, Vector parentPos) {
             Vector screenPosition = parentPos + new Vector(this.GamePosition.X * 2, this.GamePosition.Y);
 
             screen.SetCell(screenPosition, this.BodyCharLeft, this.Foreground, this.Background);
