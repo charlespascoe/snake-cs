@@ -24,19 +24,41 @@ namespace Snake.Graphics {
         public virtual void Update() {}
 
         public virtual void Draw(Screen screen, Vector parentPos) {
-            if (this.Size.X <= 0 || this.Size.Y <= 0) return;
+            if (this.Style == null || this.Size.X <= 0 || this.Size.Y <= 0) return;
 
-            for (int x = 0; x < this.Size.X; x++) {
-                for (int y = 0; y < this.Size.Y; y++) {
-                    char cell = ' ';
-                    ConsoleColor b = this.Style.Background;
-                    ConsoleColor f = this.Style.Foreground;
-                    if (this.HasBorder && this.IsBorder(x, y)) {
-                        cell = this.GetBorderCell(x, y);
-                        b = this.Style.BorderBackground;
-                        f = this.Style.BorderForeground;
-                    }
-                    screen.SetCell(parentPos + this.Position + new Vector(x, y), cell, f, b);
+            screen.SetCells(parentPos + this.Position, this.Size, ' ', this.Style.Foreground, this.Style.Background);
+
+            if (this.HasBorder) {
+                for (int x = 0; x < this.Size.X; x++) {
+                    screen.SetCell(
+                        parentPos + this.Position + new Vector(x, 0),
+                        this.GetBorderCell(x, 0),
+                        this.Style.BorderForeground,
+                        this.Style.BorderBackground
+                    );
+
+                    screen.SetCell(
+                        parentPos + this.Position + new Vector(x, this.Size.Y - 1),
+                        this.GetBorderCell(x, this.Size.Y - 1),
+                        this.Style.BorderForeground,
+                        this.Style.BorderBackground
+                    );
+                }
+
+                for (int y = 1; y < this.Size.Y - 1; y++) {
+                    screen.SetCell(
+                        parentPos + this.Position + new Vector(0, y),
+                        this.GetBorderCell(0, y),
+                        this.Style.BorderForeground,
+                        this.Style.BorderBackground
+                    );
+
+                    screen.SetCell(
+                        parentPos + this.Position + new Vector(this.Size.X - 1, y),
+                        this.GetBorderCell(this.Size.X - 1, y),
+                        this.Style.BorderForeground,
+                        this.Style.BorderBackground
+                    );
                 }
             }
         }
