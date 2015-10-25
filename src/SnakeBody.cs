@@ -20,32 +20,28 @@ namespace Snake {
         private int ticksBetweenMoves;
         private int ticksUntilNextMove;
 
-        public Vector GameAreaSize { get; set; }
+        public Vector GameAreaSize { get; private set; }
 
-        public SnakeBody(int startSpeed) {
+        public SnakeBody(int startSpeed, Vector gameAreaSize) {
             ticksBetweenMoves = startSpeed;
             ticksUntilNextMove = ticksBetweenMoves;
 
-            this.head.GamePosition.X = 10;
-            this.head.GamePosition.Y = 10;
-            this.tail.GamePosition.X = 6;
-            this.tail.GamePosition.Y = 10;
+            this.GameAreaSize = gameAreaSize;
 
-            BodySegment b1 = new BodySegment();
-            b1.GamePosition.X = 9;
-            b1.GamePosition.Y = 10;
+            Vector pos = new Vector(this.GameAreaSize.X / 2, this.GameAreaSize.Y / 2);
 
-            BodySegment b2 = new BodySegment();
-            b2.GamePosition.X = 8;
-            b2.GamePosition.Y = 10;
+            this.head.GamePosition = new Vector(pos);
 
-            BodySegment b3 = new BodySegment();
-            b3.GamePosition.X = 7;
-            b3.GamePosition.Y = 10;
 
-            this.body.Add(b1);
-            this.body.Add(b2);
-            this.body.Add(b3);
+            for (int i = 0; i < 3; i++) {
+                pos += new Vector(0, 1);
+                BodySegment b = new BodySegment();
+                b.GamePosition = pos;
+                this.body.Add(b);
+            }
+
+            this.tail = new Tail();
+            this.tail.GamePosition = pos + new Vector(0, 1);
         }
 
         public void Update() {
