@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Snake.Graphics {
     public class Screen {
@@ -83,23 +84,34 @@ namespace Snake.Graphics {
         }
 
         public void DrawAll() {
-            Console.SetCursorPosition(0, 0);
-            Console.ForegroundColor = this.DefaultForeground;
-            Console.BackgroundColor = this.DefaultBackground;
+            Console.Clear();
 
-            char[] row = new char[this.Width];
+            List<char> writeBuffer = new List<char>();
+
+            Console.ForegroundColor = this.buffer[0, 0].Foreground;
+            Console.BackgroundColor = this.buffer[0, 0].Background;
+
             for (int y = 0; y < this.Height; y++) {
                 for (int x = 0; x < this.Width; x++) {
                     Cell cell = this.buffer[x, y];
 
-                    if (cell.Foreground == this.DefaultBackground && cell.Background == this.DefaultBackground) {
-                        cell.AfterDraw();
+                    if (cell.Foreground != Console.ForegroundColor || cell.Background != Console.BackgroundColor) {
+                        Console.Write(writeBuffer.ToArray());
+                        writeBuffer.Clear();
+
+                        Console.ForegroundColor = cell.Foreground;
+                        Console.BackgroundColor = cell.Background;
                     }
 
-                    row[x] = cell.Character;
+                    writeBuffer.Add(cell.Character);
+                    cell.AfterDraw();
                 }
-                Console.Write(row);
             }
+
+            if (writeBuffer.Count > 0) {
+                Console.Write(writeBuffer.ToArray());
+            }
+
         }
 
         public void Draw() {
