@@ -73,6 +73,31 @@ namespace Snake.Graphics {
             }
         }
 
+        public void SetCells(Vector position, Vector size, char c, ConsoleColor f, ConsoleColor b) {
+            this.SetCells(position.X, position.Y, size.X, size.Y, c, f, b);
+        }
+
+        public void SetCells(int x, int y, int width, int height, char c, ConsoleColor f, ConsoleColor b) {
+            if ((int)c == 0) return;
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+
+            int maxX = x + width,
+                maxY = y + height;
+
+            if (maxX > this.Width) maxX = this.Width;
+            if (maxY > this.Height) maxY = this.Height;
+
+            for (int i = x; i < maxX; i++) {
+                for (int j = y; j < maxY; j++) {
+                    Cell cell = this.buffer[i, j];
+                    cell.Character = c;
+                    cell.Foreground = f;
+                    cell.Background = b;
+                }
+            }
+        }
+
         public int GetChangedCount() {
             int changed = 0;
             for (int x = 0; x < this.Width; x++) {
