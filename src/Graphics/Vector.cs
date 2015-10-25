@@ -29,6 +29,14 @@ namespace Snake.Graphics {
 
             return new Vector(x, y);
         }
+
+        public static bool operator ==(Vector v1, Vector v2) {
+            return v1.X == v2.X && v1.Y == v2.Y;
+        }
+
+        public static bool operator !=(Vector v1, Vector v2) {
+            return !(v1 == v2);
+        }
     }
 }
 
