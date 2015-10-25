@@ -7,21 +7,15 @@ using Snake.UI;
 namespace Snake {
     public class Program {
         public static void Main(string[] args) {
-            SnakeBody s = new SnakeBody(5);
-            Box b = new Box(30, 30, 20, 3);
+            Box b = new Box(30, 45, 20, 3);
             b.Style = new RoundedBoxStyle();
             b.HasBorder = true;
             b.Style.Background = ConsoleColor.Blue;
-            // b.borderBackground = ConsoleColor.DarkBlue;
             b.Style.BorderForeground = ConsoleColor.Yellow;
 
-            Box background = new Box(0, 0, 100, 50);
-            background.Style = new BoxStyle();
-            background.Style.Background = ConsoleColor.Black;
+            GameArea g = new GameArea(8, 8, 64, 32);
 
-            s.GameAreaSize = new Vector(background.Size.X / 2, background.Size.Y);
-
-            Button button = new Button(50, 30, 20, 3, "Test");
+            Button button = new Button(50, 45, 20, 3, "Test");
             button.Style = new RoundedBoxStyle();
             button.HasBorder = true;
             button.Style.BorderForeground = ConsoleColor.Yellow;
@@ -37,10 +31,9 @@ namespace Snake {
             for (int i = 0; i < 1000; i++) {
                 DateTime start = DateTime.Now;
                 UserInput.Update();
-                s.Update();
+                g.Update();
 
-                background.Draw(screen, new Vector());
-                s.Draw(screen, new Vector());
+                g.Draw(screen, new Vector());
                 b.Draw(screen, new Vector());
                 button.Draw(screen, new Vector());
 
