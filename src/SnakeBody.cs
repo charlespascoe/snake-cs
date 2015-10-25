@@ -17,6 +17,10 @@ namespace Snake {
             }
         }
 
+        public Vector HeadPosition {
+            get { return this.head.GamePosition; }
+        }
+
         private int ticksBetweenMoves;
         private int ticksUntilNextMove;
 
