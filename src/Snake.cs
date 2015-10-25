@@ -9,7 +9,13 @@ namespace Snake {
         private Tail tail = new Tail();
         private List<BodySegment> body = new List<BodySegment>();
 
-        public Direction MoveDirection { get; set; }
+        private Direction _MoveDirection = Direction.Up;
+        public Direction MoveDirection {
+            get { return this._MoveDirection; }
+            set {
+                this.SetDirection(value);
+            }
+        }
 
         private int ticksBetweenMoves;
         private int ticksUntilNextMove;
@@ -48,25 +54,33 @@ namespace Snake {
             if (UserInput.KeyPressed) {
                 switch (UserInput.Key) {
                     case ConsoleKey.W:
-                        this.MoveDirection = Direction.Up;
+                        this.SetDirection(Direction.Up);
                         break;
                     case ConsoleKey.A:
-                        this.MoveDirection = Direction.Left;
+                        this.SetDirection(Direction.Left);
                         break;
                     case ConsoleKey.S:
-                        this.MoveDirection = Direction.Down;
+                        this.SetDirection(Direction.Down);
                         break;
                     case ConsoleKey.D:
-                        this.MoveDirection = Direction.Right;
+                        this.SetDirection(Direction.Right);
                         break;
                 }
-
-                this.head.HeadDirection = this.MoveDirection;
             }
 
             if (ticksUntilNextMove <= 0) {
                 this.Move();
                 ticksUntilNextMove = ticksBetweenMoves;
+            }
+        }
+
+        private void SetDirection(Direction dir) {
+            // Body segment just behind the head
+            BodySegment b = this.body[0];
+
+            if (b.GamePosition != (this.head.GamePosition + dir.ToVector()) % this.GameAreaSize) {
+                this._MoveDirection = dir;
+                this.head.HeadDirection = dir;
             }
         }
 
