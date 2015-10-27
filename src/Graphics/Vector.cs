@@ -51,6 +51,10 @@ namespace Snake.Graphics {
         public static bool operator !=(Vector v1, Vector v2) {
             return !(v1 == v2);
         }
+
+        public override string ToString() {
+            return "(" + this.X.ToString() + ", " + this.Y.ToString() + ")";
+        }
     }
 }
 
