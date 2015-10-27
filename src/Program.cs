@@ -11,8 +11,8 @@ namespace Snake {
 
             try {
                 Program.RunGame();
-            } catch (Exception ex) {
-                Logger.Instance.Write("Error", ex.ToString());
+            } catch {
+                //Logger.Instance.Write("Error", ex.ToString());
             } finally {
                 Console.CursorVisible = true;
                 Logger.Instance.Flush();
@@ -26,13 +26,13 @@ namespace Snake {
             screen.DefaultForeground = ConsoleColor.White;
             screen.DefaultBackground = ConsoleColor.Black;
 
-            Game g = new Game(8, 4, screen.Width - 16, screen.Height - 4, new DifficultySettings(5, 10, 5));
+            Game g = new Game(new Vector(screen.Width, screen.Height), new DifficultySettings(5, 10, 5));
 
             for (int i = 0; i < 1000; i++) {
                 DateTime start = DateTime.Now;
                 UserInput.Update();
                 g.Update();
-                g.Draw(screen, new Vector());
+                g.Draw(screen);
 
                 if (UserInput.KeyPressed) {
                     screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Blue);
