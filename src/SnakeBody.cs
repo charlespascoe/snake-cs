@@ -78,6 +78,10 @@ namespace Snake {
         }
 
         private void SetDirection(Direction dir) {
+            if (dir == this.MoveDirection) {
+                this.Move();
+            }
+
             // Body segment just behind the head
             BodySegment b = this.body[0];
 
