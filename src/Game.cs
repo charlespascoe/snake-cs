@@ -8,12 +8,10 @@ namespace Snake {
         private SnakeBody snake;
         private List<GameEntity> entities;
         private bool gameOver = false;
-        private int score = 0;
+        private ScoreBox scoreBox;
         private DifficultySettings settings;
 
-        public Vector Size {
-            get { return background.Size; }
-        }
+        public Vector Size { get; private set; }
 
         public Vector GameAreaSize { get; private set; }
 
@@ -21,7 +19,8 @@ namespace Snake {
 
         public Game(int x, int y, int width, int height, DifficultySettings settings) {
             this.Position = new Vector(x, y);
-            this.background = new Box(0, 0, width, height);
+            this.Size = new Vector(width, height);
+            this.background = new Box(0, 0, width, height - 8);
             this.background.HasBorder = true;
             this.background.Style = new DoubleLineBoxStyle();
             this.background.Style.BorderForeground = ConsoleColor.Blue;
@@ -29,7 +28,7 @@ namespace Snake {
             this.settings = settings;
 
             // Subtract 2 to take into account the border
-            this.GameAreaSize = new Vector((this.Size.X - 2) / 2, this.Size.Y - 2);
+            this.GameAreaSize = new Vector((this.background.Size.X - 2) / 2, this.background.Size.Y - 2);
 
             this.snake = new SnakeBody(this.settings.StartSpeed, this.GameAreaSize);
             this.snake.OnMove += new EventHandler(this.OnSnakeMove);
@@ -40,12 +39,19 @@ namespace Snake {
             for (int i = 0; i < this.settings.FoodCount; i++) {
                 this.AddFood();
             }
+
+            Vector scoreBoxSize = new Vector(8, 3);
+            Vector scoreBoxPosition  = new Vector((this.Size.X - scoreBoxSize.X) / 2, this.background.Size.Y + 2);
+            this.scoreBox = new ScoreBox(scoreBoxPosition, scoreBoxSize);
+
         }
 
         public void Update() {
             foreach (GameEntity entity in this.entities) {
                 entity.Update();
             }
+
+            this.scoreBox.Update();
 
             if (!this.gameOver) {
                 this.snake.Update();
@@ -59,6 +65,8 @@ namespace Snake {
                 entity.Draw(screen, parentPos + new Vector(1, 1) + this.Position);
             }
 
+            this.scoreBox.Draw(screen, parentPos + this.Position);
+
             // Add Vector(1, 1) to take into account the border
             this.snake.Draw(screen, parentPos + new Vector(1, 1) + this.Position);
         }
@@ -69,8 +77,8 @@ namespace Snake {
                     if (entity is Food) {
                         this.entities.Remove(entity);
                         this.snake.Eat();
-                        this.score++;
-                        if (score % this.settings.PointsBetweenSpeedup == 0) {
+                        this.scoreBox.Score++;
+                        if (this.scoreBox.Score % this.settings.PointsBetweenSpeedup == 0) {
                             this.snake.SpeedUp();
                         }
                         this.AddFood();
