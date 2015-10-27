@@ -7,6 +7,20 @@ using Snake.UI;
 namespace Snake {
     public class Program {
         public static void Main(string[] args) {
+            Logger.Instance = new Logger("log.txt");
+
+            try {
+                Program.RunGame();
+            } catch (Exception ex) {
+                Logger.Instance.Write("Error", ex.ToString());
+            } finally {
+                Logger.Instance.Flush();
+                Logger.Instance.Close();
+            }
+        }
+
+        public static void RunGame() {
+
             Box b = new Box(30, 45, 20, 3);
             b.Style = new RoundedBoxStyle();
             b.HasBorder = true;
@@ -25,8 +39,6 @@ namespace Snake {
             Screen screen = new Screen();
             screen.DefaultForeground = ConsoleColor.White;
             screen.DefaultBackground = ConsoleColor.Black;
-
-            List<string> ts = new List<string>();
 
             for (int i = 0; i < 1000; i++) {
                 DateTime start = DateTime.Now;
@@ -49,7 +61,8 @@ namespace Snake {
                 screen.Draw();
                 TimeSpan t2 = DateTime.Now - start;
 
-                ts.Add(t1.Milliseconds.ToString() + " " + t2.Milliseconds.ToString());
+                Logger.Instance.Write("Performance", t1.Milliseconds.ToString() + " " + t2.Milliseconds.ToString());
+
 
                 int timeout = 25 - t2.Milliseconds;
 
@@ -59,11 +72,9 @@ namespace Snake {
 
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
 
-            foreach (string t in ts) {
-                Console.WriteLine(t);
-            }
-
             screen.CursorVisible = true;
+
+
         }
     }
 }
