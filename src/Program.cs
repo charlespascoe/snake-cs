@@ -32,7 +32,7 @@ namespace Snake {
             b.Style.Background = ConsoleColor.Blue;
             b.Style.BorderForeground = ConsoleColor.Yellow;
 
-            GameArea g = new GameArea(8, 4, screen.Width - 16, screen.Height - 16);
+            GameArea g = new GameArea(8, 4, screen.Width - 16, screen.Height - 16, new DifficultySettings(5, 10, 5));
 
             Button button = new Button(50, 45, 20, 3, "Test");
             button.Style = new RoundedBoxStyle();
