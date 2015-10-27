@@ -7,6 +7,7 @@ namespace Snake {
         private Box background;
         private SnakeBody snake;
         private List<GameEntity> entities;
+        private bool gameOver = false;
 
         public Vector Size {
             get { return background.Size; }
@@ -28,6 +29,7 @@ namespace Snake {
 
             this.snake = new SnakeBody(5, this.GameAreaSize);
             this.snake.OnMove += new EventHandler(this.OnSnakeMove);
+            this.snake.OnDeath += new EventHandler(this.OnSnakeDeath);
 
             this.entities = new List<GameEntity>();
 
@@ -41,7 +43,9 @@ namespace Snake {
                 entity.Update();
             }
 
-            this.snake.Update();
+            if (!this.gameOver) {
+                this.snake.Update();
+            }
         }
 
         public void Draw(Screen screen, Vector parentPos) {
@@ -66,6 +70,10 @@ namespace Snake {
                     }
                 }
             }
+        }
+
+        private void OnSnakeDeath(object sender, EventArgs e) {
+            this.gameOver = true;
         }
 
         private bool CollidesWithEntity(Vector gamePosition) {
