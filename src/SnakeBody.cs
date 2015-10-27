@@ -147,6 +147,12 @@ namespace Snake {
 
             return false;
         }
+
+        public void SpeedUp() {
+            if (this.ticksBetweenMoves > 0) {
+                this.ticksBetweenMoves--;
+            }
+        }
     }
 }
 
