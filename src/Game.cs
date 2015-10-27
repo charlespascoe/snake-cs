@@ -3,7 +3,7 @@ using Snake.Graphics;
 using System.Collections.Generic;
 
 namespace Snake {
-    public class GameArea : IDrawable {
+    public class Game : IDrawable {
         private Box background;
         private SnakeBody snake;
         private List<GameEntity> entities;
@@ -19,7 +19,7 @@ namespace Snake {
 
         public Vector Position { get; private set; }
 
-        public GameArea(int x, int y, int width, int height, DifficultySettings settings) {
+        public Game(int x, int y, int width, int height, DifficultySettings settings) {
             this.Position = new Vector(x, y);
             this.background = new Box(0, 0, width, height);
             this.background.HasBorder = true;
