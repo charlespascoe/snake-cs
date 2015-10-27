@@ -6,6 +6,7 @@ using Snake.UI;
 namespace Snake {
     public class SnakeBody : IDrawable {
         public event EventHandler OnMove;
+        public event EventHandler OnDeath;
 
         private Head head = new Head();
         private Tail tail = new Tail();
@@ -98,6 +99,10 @@ namespace Snake {
             b.GamePosition = oldHeadPos;
             this.body.Insert(0, b);
 
+            if (this.CollidesWithBody(this.head.GamePosition, false) && this.OnDeath != null) {
+                this.OnDeath(this, EventArgs.Empty);
+            }
+
             if (this.OnMove != null) {
                 this.OnMove(this, EventArgs.Empty);
             }
@@ -118,8 +123,8 @@ namespace Snake {
             this.body.Add(b);
         }
 
-        public bool CollidesWithBody(Vector gamePosition) {
-            if (this.head.GamePosition == gamePosition || this.tail.GamePosition == gamePosition) {
+        public bool CollidesWithBody(Vector gamePosition, bool includeHead=true) {
+            if ((includeHead && this.head.GamePosition == gamePosition) || this.tail.GamePosition == gamePosition) {
                 return true;
             }
 
