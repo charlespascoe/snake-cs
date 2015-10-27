@@ -98,6 +98,17 @@ namespace Snake.Graphics {
             }
         }
 
+        public void WriteString(Vector v, string text) {
+            this.WriteString(v.X, v.Y, text);
+        }
+
+        public void WriteString(int x, int y, string text) {
+            foreach (char c in text) {
+                this.SetCell(x, y, c);
+                x++;
+            }
+        }
+
         public int GetChangedCount() {
             int changed = 0;
             for (int x = 0; x < this.Width; x++) {
