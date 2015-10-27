@@ -26,28 +26,13 @@ namespace Snake {
             screen.DefaultForeground = ConsoleColor.White;
             screen.DefaultBackground = ConsoleColor.Black;
 
-            Box b = new Box(30, 45, 20, 3);
-            b.Style = new RoundedBoxStyle();
-            b.HasBorder = true;
-            b.Style.Background = ConsoleColor.Blue;
-            b.Style.BorderForeground = ConsoleColor.Yellow;
-
-            Game g = new Game(8, 4, screen.Width - 16, screen.Height - 16, new DifficultySettings(5, 10, 5));
-
-            Button button = new Button(50, 45, 20, 3, "Test");
-            button.Style = new RoundedBoxStyle();
-            button.HasBorder = true;
-            button.Style.BorderForeground = ConsoleColor.Yellow;
-            button.IsFocussed = true;
+            Game g = new Game(8, 4, screen.Width - 16, screen.Height - 4, new DifficultySettings(5, 10, 5));
 
             for (int i = 0; i < 1000; i++) {
                 DateTime start = DateTime.Now;
                 UserInput.Update();
                 g.Update();
-
                 g.Draw(screen, new Vector());
-                b.Draw(screen, new Vector());
-                button.Draw(screen, new Vector());
 
                 if (UserInput.KeyPressed) {
                     screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Blue);
@@ -61,8 +46,7 @@ namespace Snake {
                 screen.Draw();
                 TimeSpan t2 = DateTime.Now - start;
 
-                Logger.Instance.Write("Performance", t1.Milliseconds.ToString() + " " + t2.Milliseconds.ToString());
-
+                //Logger.Instance.Write("Performance", t1.Milliseconds.ToString() + " " + t2.Milliseconds.ToString());
 
                 int timeout = 25 - t2.Milliseconds;
 
@@ -71,9 +55,6 @@ namespace Snake {
             }
 
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
-
-
-
         }
     }
 }
