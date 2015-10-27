@@ -14,12 +14,17 @@ namespace Snake {
             } catch (Exception ex) {
                 Logger.Instance.Write("Error", ex.ToString());
             } finally {
+                Console.CursorVisible = true;
                 Logger.Instance.Flush();
                 Logger.Instance.Close();
             }
+
         }
 
         public static void RunGame() {
+            Screen screen = new Screen();
+            screen.DefaultForeground = ConsoleColor.White;
+            screen.DefaultBackground = ConsoleColor.Black;
 
             Box b = new Box(30, 45, 20, 3);
             b.Style = new RoundedBoxStyle();
@@ -27,18 +32,13 @@ namespace Snake {
             b.Style.Background = ConsoleColor.Blue;
             b.Style.BorderForeground = ConsoleColor.Yellow;
 
-            GameArea g = new GameArea(8, 8, 64, 32);
+            GameArea g = new GameArea(8, 4, screen.Width - 16, screen.Height - 16);
 
             Button button = new Button(50, 45, 20, 3, "Test");
             button.Style = new RoundedBoxStyle();
             button.HasBorder = true;
             button.Style.BorderForeground = ConsoleColor.Yellow;
             button.IsFocussed = true;
-
-
-            Screen screen = new Screen();
-            screen.DefaultForeground = ConsoleColor.White;
-            screen.DefaultBackground = ConsoleColor.Black;
 
             for (int i = 0; i < 1000; i++) {
                 DateTime start = DateTime.Now;
@@ -72,7 +72,6 @@ namespace Snake {
 
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
 
-            screen.CursorVisible = true;
 
 
         }
