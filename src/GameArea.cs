@@ -3,7 +3,7 @@ using Snake.Graphics;
 using System.Collections.Generic;
 
 namespace Snake {
-    public class Game : IDrawable {
+    public class GameArea : IDrawable {
         private Box background;
         private SnakeBody snake;
         private List<GameEntity> entities;
