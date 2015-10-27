@@ -17,8 +17,7 @@ namespace Snake.Graphics {
 
         // Subtract 1, because when the cursor writes the last line,
         // it will go to the next line, pushing everything up by 1
-        public Screen() : this(Console.WindowWidth, Console.WindowHeight - 1) {
-        }
+        public Screen() : this(Console.WindowWidth, Console.WindowHeight - 1) {}
 
         private Cell[,] buffer;
 
@@ -144,12 +143,13 @@ namespace Snake.Graphics {
                     writeBuffer.Add(cell.Character);
                     cell.AfterDraw();
                 }
+
+                if (y < this.Height - 1) {
+                    writeBuffer.Add('\n');
+                }
             }
 
-            if (writeBuffer.Count > 0) {
-                Console.Write(writeBuffer.ToArray());
-            }
-
+            Console.Write(writeBuffer.ToArray());
         }
 
         public void Draw() {
