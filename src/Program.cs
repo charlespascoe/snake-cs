@@ -23,6 +23,7 @@ namespace Snake {
 
         private static void OnQuit(object sender, ConsoleCancelEventArgs e) {
                 Console.CursorVisible = true;
+                Console.Clear();
                 Logger.Flush();
                 Logger.Close();
         }
@@ -32,9 +33,9 @@ namespace Snake {
             screen.DefaultForeground = ConsoleColor.White;
             screen.DefaultBackground = ConsoleColor.Black;
 
-            Game g = new Game(new Vector(screen.Width, screen.Height), new DifficultySettings(5, 10, 5));
+            Game g = new Game(new Vector(screen.Width, screen.Height), new DifficultySettings(5, 10, 50));
 
-            for (int i = 0; i < 1000; i++) {
+            while (true) {
                 DateTime start = DateTime.Now;
                 UserInput.Update();
                 g.Update();
@@ -59,8 +60,6 @@ namespace Snake {
                 if (timeout < 0) timeout = 0;
                 Thread.Sleep(timeout);
             }
-
-            Console.SetCursorPosition(0, Console.WindowHeight - 1);
         }
     }
 }
