@@ -3,16 +3,16 @@ using Snake.Graphics;
 using System.Collections.Generic;
 
 namespace Snake {
-    public class GameArea : IDrawable {
+    public class GameArea : IPositionable {
         private Box background;
         private SnakeBody snake;
         private List<GameEntity> entities;
         private bool gameOver = false;
         private DifficultySettings settings;
 
-        public Vector Size { get; private set; }
+        public Vector Size { get; set; }
         public Vector GameAreaSize { get; private set; }
-        public Vector Position { get; private set; }
+        public Vector Position { get; set; }
         public int Score { get; private set; }
 
         public event EventHandler OnScoreChange;
