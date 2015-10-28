@@ -9,16 +9,22 @@ namespace Snake {
         public static void Main(string[] args) {
             Logger.Instance = new Logger("log.txt");
 
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(Program.OnQuit);
+
             try {
                 Program.RunGame();
-            } catch {
-                //Logger.Instance.Write("Error", ex.ToString());
+            } catch (Exception ex) {
+                Logger.Write("Error", ex.ToString());
             } finally {
-                Console.CursorVisible = true;
-                Logger.Instance.Flush();
-                Logger.Instance.Close();
+                Program.OnQuit(null, null);
             }
 
+        }
+
+        private static void OnQuit(object sender, ConsoleCancelEventArgs e) {
+                Console.CursorVisible = true;
+                Logger.Flush();
+                Logger.Close();
         }
 
         public static void RunGame() {

@@ -14,7 +14,13 @@ namespace Snake {
             this.strm = new StreamWriter(fs, Encoding.UTF8, 65536);
         }
 
-        public void Write(string tag, string message) {
+        public static void Write(string tag, string message) {
+            if (Logger.Instance != null) {
+                Logger.Instance.WriteLog(tag, message);
+            }
+        }
+
+        public void WriteLog(string tag, string message) {
             StringBuilder str = new StringBuilder();
             str.Append("[").Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")).Append("]");
             str.Append(" <").Append(tag).Append(">\n");
@@ -23,11 +29,23 @@ namespace Snake {
             this.strm.WriteLineAsync(str.ToString());
         }
 
-        public void Flush() {
+        public static void Flush() {
+            if (Logger.Instance != null) {
+                Logger.Instance.FlushLog();
+            }
+        }
+
+        public void FlushLog() {
             this.strm.Flush();
         }
 
-        public void Close() {
+        public static void Close() {
+            if (Logger.Instance != null) {
+                Logger.Instance.CloseLog();
+            }
+        }
+
+        public void CloseLog() {
             this.strm.Close();
         }
     }
