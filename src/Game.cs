@@ -1,33 +1,42 @@
 using System;
+using System.Collections.Generic;
 using Snake.Graphics;
 using Snake.UI;
 
 namespace Snake {
     public class Game : Context {
+        private List<IPositionable> layouts = new List<IPositionable>();
         private GameArea gameArea;
         private ScoreBox scoreBox;
 
+
+
         public Game(Vector screenSize, DifficultySettings settings) : base(screenSize) {
-            this.gameArea = new GameArea(new Vector(8, 4), screenSize - new Vector(16, 12), settings);
+            VerticalLayout verticalLayout = new VerticalLayout(new Vector(8, 4), screenSize - new Vector(16, 8), LayoutSizing.Center);
+
+            this.gameArea = new GameArea(new Vector(), verticalLayout.Size - new Vector(0, 5), settings);
             this.gameArea.OnScoreChange += new EventHandler(this.OnScoreChange);
 
             Vector scoreBoxSize = new Vector(8, 3);
-            Vector scoreBoxPosition = new Vector(
-                (screenSize.X - scoreBoxSize.X) / 2,
-                gameArea.Position.Y + gameArea.Size.Y + 2
-            );
 
-            this.scoreBox = new ScoreBox(scoreBoxPosition, scoreBoxSize);
+            this.scoreBox = new ScoreBox(new Vector(), scoreBoxSize);
+
+            verticalLayout.AddChild(gameArea);
+            verticalLayout.AddChild(scoreBox);
+
+            this.layouts.Add(verticalLayout);
         }
 
         public override void Update() {
-            this.gameArea.Update();
-            this.scoreBox.Update();
+            foreach (IPositionable layout in this.layouts) {
+                layout.Update();
+            }
         }
 
         public override void Draw(Screen screen) {
-            this.gameArea.Draw(screen, new Vector());
-            this.scoreBox.Draw(screen, new Vector());
+            foreach (IPositionable layout in this.layouts) {
+                layout.Draw(screen, new Vector());
+            }
         }
 
         private void OnScoreChange(object sender, EventArgs e) {
