@@ -25,40 +25,45 @@ namespace Snake.UI {
         }
 
         public void Focus() {
-            this.Blur(false);
-
-            if (this.elements.Count > 0) {
-                this.IsFocussed = true;
-                this.elements[0].Focus();
-            } else {
-                this.Blur();
+            if (!this.IsFocussed) {
+                if (this.elements.Count > 0) {
+                    this.IsFocussed = true;
+                    this.elements[0].Focus();
+                } else {
+                    this.Blur(new OnBlurEventArgs());
+                }
             }
         }
 
-        public void Blur(bool fireOnBlur=true) {
+        public void Blur(OnBlurEventArgs e = null) {
             foreach (IFocusable element in this.elements) {
-                element.Blur(false);
+                element.Blur();
             }
 
             this.IsFocussed = false;
 
-            if (fireOnBlur && this.OnBlur != null) {
+            if (e != null && this.OnBlur != null) {
                 this.OnBlur(this, new OnBlurEventArgs());
             }
         }
 
         private void HandleElementBlur(object sender, OnBlurEventArgs e) {
             int index = this.elements.IndexOf((IFocusable)sender);
-            Logger.Write("Lense", index.ToString());
 
-            if (index == this.elements.Count - 1) {
-                if (this.LoopElements) {
-                    this.Focus();
-                } else {
-                    this.Blur();
-                }
+            if (e.Direction == FocusDirection.Forward) {
+                index++;
             } else {
-                this.elements[index + 1].Focus();
+                index--;
+            }
+
+            if (this.LoopElements) {
+                index = (index + this.elements.Count) % this.elements.Count;
+            }
+
+            if (index < 0 || index >= this.elements.Count) {
+                this.Blur(new OnBlurEventArgs(e.Direction));
+            } else {
+                this.elements[index].Focus();
             }
         }
 

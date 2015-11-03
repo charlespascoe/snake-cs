@@ -1,7 +1,21 @@
 using System;
 
 namespace Snake.UI {
-    public class OnBlurEventArgs : EventArgs {}
+    public enum FocusDirection {
+        Forward, Backward
+    }
+
+    public class OnBlurEventArgs : EventArgs {
+        public FocusDirection Direction { get; set; }
+
+        public OnBlurEventArgs() {
+            this.Direction = FocusDirection.Forward;
+        }
+
+        public OnBlurEventArgs(FocusDirection focusDirection) {
+            this.Direction = focusDirection;
+        }
+    }
 
     public delegate void OnBlurEventHander(object sender, OnBlurEventArgs e);
 
@@ -12,7 +26,7 @@ namespace Snake.UI {
 
         void Focus();
 
-        void Blur(bool fireOnBlur=true);
+        void Blur(OnBlurEventArgs e = null);
     }
 }
 
