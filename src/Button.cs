@@ -9,8 +9,12 @@ namespace Snake {
 
         public Button() : base() {}
 
-        public Button(int x, int y, int width, int height, string text) : base(x, y, width, height) {
+        public Button(string text) : this(new Vector(), new Vector(text.Length + 4, 3), text) {}
+
+        public Button(Vector position, Vector size, string text) : base(position, size) {
             this.Text = text;
+            this.HasBorder = true;
+            this.Style = new RoundedBoxStyle();
         }
 
         public override void Update() {
