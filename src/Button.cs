@@ -64,7 +64,7 @@ namespace Snake {
                 textPosition.Y++;
             }
 
-            string visibleText = Utils.CenterString(this.Text, maxTextLength);
+            string visibleText = this.Text.MaxLength(maxTextLength).Center(maxTextLength);
 
             if (this.IsFocussed) {
                 visibleText = '*' + visibleText + '*';
@@ -72,10 +72,7 @@ namespace Snake {
                 visibleText = ' ' + visibleText + ' ';
             }
 
-            foreach (char c in visibleText) {
-                screen.SetCell(parentPos + this.Position + textPosition, c);
-                textPosition.X++;
-            }
+            screen.WriteString(parentPos + this.Position + textPosition, visibleText);
         }
     }
 }
