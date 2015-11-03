@@ -17,12 +17,10 @@ namespace Snake {
 
         public event EventHandler OnScoreChange;
 
-        public GameArea(Vector position, Vector size, DifficultySettings settings) : this(position.X, position.Y, size.X, size.Y, settings) {}
-
-        public GameArea(int x, int y, int width, int height, DifficultySettings settings) {
-            this.Position = new Vector(x, y);
-            this.Size = new Vector(width, height);
-            this.background = new Box(0, 0, width, height);
+        public GameArea(Vector position, Vector size, DifficultySettings settings) {
+            this.Position = new Vector(position);
+            this.Size = new Vector(size);
+            this.background = new Box(new Vector(), this.Size);
             this.background.HasBorder = true;
             this.background.Style = new DoubleLineBoxStyle();
             this.background.Style.BorderForeground = ConsoleColor.Blue;
