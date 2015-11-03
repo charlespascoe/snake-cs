@@ -11,7 +11,10 @@ namespace Snake.UI {
         public static bool ShiftPressed { get; private set; }
         public static bool AltPressed { get; private set; }
 
+        public static bool InputHandled { get; set; }
+
         public static void Update() {
+            UserInput.InputHandled = false;
             UserInput.KeyPressed = Console.KeyAvailable;
             if (Console.KeyAvailable) {
                 ConsoleKeyInfo cki = Console.ReadKey(true);
