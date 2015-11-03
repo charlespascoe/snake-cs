@@ -5,12 +5,11 @@ namespace Snake.Graphics {
         public Vector Position { get; set; }
         public Vector Size { get; set; }
 
-        public bool HasBorder { get; set; }
-
         public BoxStyle Style { get; set; }
 
         public Box() {
-
+            this.Position = new Vector();
+            this.Size = new Vector();
         }
 
         public Box(Vector position, Vector size) {
@@ -31,7 +30,7 @@ namespace Snake.Graphics {
 
             screen.SetCells(parentPos + this.Position, this.Size, ' ', this.Style.Foreground, this.Style.Background);
 
-            if (this.HasBorder) {
+            if (this.Style.HasBorder) {
                 for (int x = 0; x < this.Size.X; x++) {
                     screen.SetCell(
                         parentPos + this.Position + new Vector(x, 0),

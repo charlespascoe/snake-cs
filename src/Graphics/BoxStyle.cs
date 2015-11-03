@@ -14,11 +14,14 @@ namespace Snake.Graphics {
         public ConsoleColor BorderForeground { get; set; }
         public ConsoleColor BorderBackground { get; set; }
 
+        public bool HasBorder { get; set; }
+
         public BoxStyle() {
             this.Foreground = ConsoleColor.White;
             this.Background = ConsoleColor.Black;
             this.BorderForeground = ConsoleColor.White;
             this.BorderBackground = ConsoleColor.Black;
+            this.HasBorder = true;
         }
     }
 }

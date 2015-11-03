@@ -20,8 +20,8 @@ namespace Snake {
         public GameArea(Vector position, Vector size, DifficultySettings settings) {
             this.Position = new Vector(position);
             this.Size = new Vector(size);
+
             this.background = new Box(new Vector(), this.Size);
-            this.background.HasBorder = true;
             this.background.Style = new DoubleLineBoxStyle();
             this.background.Style.BorderForeground = ConsoleColor.Blue;
 

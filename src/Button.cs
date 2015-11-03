@@ -13,7 +13,6 @@ namespace Snake {
 
         public Button(Vector position, Vector size, string text) : base(position, size) {
             this.Text = text;
-            this.HasBorder = true;
             this.Style = new RoundedBoxStyle();
         }
 
@@ -28,7 +27,7 @@ namespace Snake {
 
             Vector textPosition = new Vector();
 
-            if (this.HasBorder) {
+            if (this.Style != null && this.Style.HasBorder) {
                 maxTextLength -= 2;
                 textPosition.X++;
                 textPosition.Y++;

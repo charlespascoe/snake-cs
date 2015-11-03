@@ -7,7 +7,6 @@ namespace Snake {
 
         public ScoreBox(Vector position, Vector size) : base(position, size) {
             this.Score = 0;
-            this.HasBorder = true;
             this.Style = new RoundedBoxStyle();
         }
 
