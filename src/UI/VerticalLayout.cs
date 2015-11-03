@@ -79,7 +79,7 @@ namespace Snake.UI {
                         break;
                 }
 
-                yPos += child.Size.Y + 1 + this.Spacing;
+                yPos += child.Size.Y + this.Spacing;
             }
         }
     }
