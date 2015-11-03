@@ -1,11 +1,16 @@
 using System;
 using Snake.Graphics;
+using Snake.UI;
 
 namespace Snake {
-    public class Button : Box {
+    public class Button : Box, IFocusable {
         public string Text { get; set; }
 
-        public bool IsFocussed { get; set; }
+        public bool IsFocussed { get; private set; }
+
+        public event OnBlurEventHander OnBlur;
+        public event EventHandler OnClick;
+
 
         public Button() : base() {}
 
@@ -17,7 +22,33 @@ namespace Snake {
         }
 
         public override void Update() {
+            if (this.IsFocussed && UserInput.KeyPressed && !UserInput.InputHandled) {
+                switch (UserInput.Key) {
+                    case ConsoleKey.Tab:
+                        Logger.Write("Button", "Focus next element!");
+                        UserInput.InputHandled = true;
+                        this.Blur();
+                        break;
+                    case ConsoleKey.Enter:
+                        if (this.OnClick != null) {
+                            this.OnClick(this, EventArgs.Empty);
+                        }
+                        UserInput.InputHandled = true;
+                        break;
+                }
+            }
+        }
 
+        public void Focus() {
+            this.IsFocussed = true;
+        }
+
+        public void Blur(bool fireOnBlur=true) {
+            this.IsFocussed = false;
+
+            if (fireOnBlur && this.OnBlur != null) {
+                this.OnBlur(this, new OnBlurEventArgs());
+            }
         }
 
         public override void Draw(Screen screen, Vector parentPos) {
