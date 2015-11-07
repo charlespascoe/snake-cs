@@ -14,6 +14,7 @@ namespace Snake {
         public Vector GameAreaSize { get; private set; }
         public Vector Position { get; set; }
         public int Score { get; private set; }
+        public bool Paused { get; set; }
 
         public event EventHandler OnScoreChange;
 
@@ -39,9 +40,13 @@ namespace Snake {
             for (int i = 0; i < this.settings.FoodCount; i++) {
                 this.AddFood();
             }
+
+            this.Paused = false;
         }
 
         public void Update() {
+            if (this.Paused) return;
+
             foreach (GameEntity entity in this.entities) {
                 entity.Update();
             }
