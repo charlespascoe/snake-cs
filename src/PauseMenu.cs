@@ -7,7 +7,7 @@ namespace Snake {
         private VerticalLayout layout;
         private Lense lense;
 
-        public event OnBlurEventHander OnBlur;
+        public event BlurEventHander OnBlur;
         public event EventHandler OnResume;
 
         public bool IsFocussed { get; private set; }
@@ -54,7 +54,7 @@ namespace Snake {
             this.IsFocussed = true;
         }
 
-        public void Blur(OnBlurEventArgs e = null) {
+        public void Blur(BlurEventArgs e = null) {
             this.IsFocussed = false;
 
             if (e != null && this.OnBlur != null) {

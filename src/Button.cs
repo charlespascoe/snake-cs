@@ -8,7 +8,7 @@ namespace Snake {
 
         public bool IsFocussed { get; private set; }
 
-        public event OnBlurEventHander OnBlur;
+        public event BlurEventHander OnBlur;
         public event EventHandler OnClick;
 
 
@@ -27,7 +27,7 @@ namespace Snake {
                     case ConsoleKey.Tab:
                         Logger.Write("Button", "Focus next element!");
                         UserInput.InputHandled = true;
-                        this.Blur(new OnBlurEventArgs(UserInput.ShiftPressed ? FocusDirection.Backward : FocusDirection.Forward));
+                        this.Blur(new BlurEventArgs(UserInput.ShiftPressed ? FocusDirection.Backward : FocusDirection.Forward));
                         break;
                     case ConsoleKey.Enter:
                         if (this.OnClick != null) {
@@ -43,7 +43,7 @@ namespace Snake {
             this.IsFocussed = true;
         }
 
-        public void Blur(OnBlurEventArgs e = null) {
+        public void Blur(BlurEventArgs e = null) {
             this.IsFocussed = false;
 
             if (e != null && this.OnBlur != null) {

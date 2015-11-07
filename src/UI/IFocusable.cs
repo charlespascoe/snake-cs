@@ -5,28 +5,28 @@ namespace Snake.UI {
         Forward, Backward
     }
 
-    public class OnBlurEventArgs : EventArgs {
+    public class BlurEventArgs : EventArgs {
         public FocusDirection Direction { get; set; }
 
-        public OnBlurEventArgs() {
+        public BlurEventArgs() {
             this.Direction = FocusDirection.Forward;
         }
 
-        public OnBlurEventArgs(FocusDirection focusDirection) {
+        public BlurEventArgs(FocusDirection focusDirection) {
             this.Direction = focusDirection;
         }
     }
 
-    public delegate void OnBlurEventHander(object sender, OnBlurEventArgs e);
+    public delegate void BlurEventHander(object sender, BlurEventArgs e);
 
     public interface IFocusable {
         bool IsFocussed { get; }
 
-        event OnBlurEventHander OnBlur;
+        event BlurEventHander OnBlur;
 
         void Focus();
 
-        void Blur(OnBlurEventArgs e = null);
+        void Blur(BlurEventArgs e = null);
     }
 }
 

@@ -8,7 +8,7 @@ namespace Snake.UI {
         public bool IsFocussed { get; private set; }
         public bool LoopElements { get; set; }
 
-        public event OnBlurEventHander OnBlur;
+        public event BlurEventHander OnBlur;
 
         public Lense() : this(true) {}
 
@@ -19,7 +19,7 @@ namespace Snake.UI {
 
         public void AddChild(IFocusable child) {
             if (!this.elements.Contains(child)) {
-                child.OnBlur += new OnBlurEventHander(this.HandleElementBlur);
+                child.OnBlur += new BlurEventHander(this.HandleElementBlur);
                 this.elements.Add(child);
             }
         }
@@ -30,12 +30,12 @@ namespace Snake.UI {
                     this.IsFocussed = true;
                     this.elements[0].Focus();
                 } else {
-                    this.Blur(new OnBlurEventArgs());
+                    this.Blur(new BlurEventArgs());
                 }
             }
         }
 
-        public void Blur(OnBlurEventArgs e = null) {
+        public void Blur(BlurEventArgs e = null) {
             foreach (IFocusable element in this.elements) {
                 element.Blur();
             }
@@ -43,11 +43,11 @@ namespace Snake.UI {
             this.IsFocussed = false;
 
             if (e != null && this.OnBlur != null) {
-                this.OnBlur(this, new OnBlurEventArgs());
+                this.OnBlur(this, e);
             }
         }
 
-        private void HandleElementBlur(object sender, OnBlurEventArgs e) {
+        private void HandleElementBlur(object sender, BlurEventArgs e) {
             int index = this.elements.IndexOf((IFocusable)sender);
 
             if (e.Direction == FocusDirection.Forward) {
@@ -61,7 +61,7 @@ namespace Snake.UI {
             }
 
             if (index < 0 || index >= this.elements.Count) {
-                this.Blur(new OnBlurEventArgs(e.Direction));
+                this.Blur(new BlurEventArgs(e.Direction));
             } else {
                 this.elements[index].Focus();
             }
