@@ -67,14 +67,14 @@ namespace Snake.Graphics {
 
         public Container(IPositionable child, HorizontalPosition horizontalPos, VerticalPosition verticalPos, Padding padding) {
             this.child = child;
-            this.Horizontal = horizontalPos;
-            this.Vertical = verticalPos;
-            this.ContainerPadding = padding;
-
-            this.Size = new Vector(
+            this._ContainerPadding = padding;
+            this._Size = new Vector(
                 this.child.Size.X  + this.ContainerPadding.Left + this.ContainerPadding.Right,
                 this.child.Size.Y + this.ContainerPadding.Top + this.ContainerPadding.Bottom
             );
+            this._Horizontal = horizontalPos;
+            this._Vertical = verticalPos;
+            this.CalculateChildLayout();
         }
 
 
@@ -131,7 +131,6 @@ namespace Snake.Graphics {
 
             this.child.Position = new Vector(x, y);
             this.child.Size = new Vector(width, height);
-
         }
     }
 }
