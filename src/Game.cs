@@ -11,7 +11,7 @@ namespace Snake {
         private PauseMenu pauseMenu;
 
         public Game(Vector screenSize, DifficultySettings settings) : base(screenSize) {
-            VerticalLayout verticalLayout = new VerticalLayout(new Vector(8, 4), screenSize - new Vector(16, 8), LayoutSizing.Center);
+            VerticalLayout verticalLayout = new VerticalLayout(new Vector(8, 4), screenSize - new Vector(16, 8));
 
             this.gameArea = new GameArea(new Vector(), verticalLayout.Size - new Vector(0, 5), settings);
             this.gameArea.OnScoreChange += new EventHandler(this.OnScoreChange);
@@ -21,7 +21,7 @@ namespace Snake {
             this.scoreBox = new ScoreBox(new Vector(), scoreBoxSize);
 
             verticalLayout.AddChild(gameArea);
-            verticalLayout.AddChild(scoreBox);
+            verticalLayout.AddChild(new Container(scoreBox, HorizontalPosition.Center, VerticalPosition.Center));
 
             this.layouts.Add(verticalLayout);
 

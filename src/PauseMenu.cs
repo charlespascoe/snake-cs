@@ -17,7 +17,7 @@ namespace Snake {
 
             this.lense = new Lense();
 
-            this.layout = new VerticalLayout(new Vector(1, 2), new Vector(this.Size) - new Vector(2, 2), LayoutSizing.Stretch);
+            this.layout = new VerticalLayout(new Vector(1, 2), new Vector(this.Size) - new Vector(2, 2));
             this.layout.Spacing = 0;
 
             Button b1 = new Button("Resume");
