@@ -13,7 +13,6 @@ namespace Snake.UI {
             set {
                 if (value != null && value != this._Position) {
                     this._Position = value;
-                    this.CalculateChildLayouts();
                 }
             }
         }
