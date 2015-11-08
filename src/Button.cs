@@ -60,8 +60,7 @@ namespace Snake {
 
             if (this.Style != null && this.Style.HasBorder) {
                 maxTextLength -= 2;
-                textPosition.X++;
-                textPosition.Y++;
+                textPosition += new Vector(1, 1);
             }
 
             string visibleText = this.Text.MaxLength(maxTextLength).Center(maxTextLength);

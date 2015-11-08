@@ -71,7 +71,7 @@ namespace Snake.UI {
                         child.Position = new Vector(0, yPos);
                         break;
                     case LayoutSizing.Stretch:
-                        child.Size.X = this.Size.X;
+                        child.Size = new Vector(this.Size.X, child.Size.Y);
                         child.Position = new Vector(0, yPos);
                         break;
                     case LayoutSizing.Center:

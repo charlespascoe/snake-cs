@@ -13,14 +13,14 @@ namespace Snake.Graphics {
         }
 
         public Box(Vector position, Vector size) {
-            Vector p = new Vector(position);
-            Vector s = new Vector(size);
+            int width = size.X;
+            int height = size.Y;
 
-            if (s.X < 0) s.X = 0;
-            if (s.Y < 0) s.Y = 0;
+            if (width < 0) width = 0;
+            if (height < 0) height = 0;
 
-            this.Position = p;
-            this.Size = s;
+            this.Position = position;
+            this.Size = new Vector(width, height);
         }
 
         public virtual void Update() {}
