@@ -21,7 +21,7 @@ namespace Snake.Graphics {
 
         private Cell[,] buffer;
 
-        private int drawChangedThreshold = 100;
+        private int drawChangedThreshold = 1000;
 
         public Screen(int width, int height) {
             if (width < 0 || height < 0) {
