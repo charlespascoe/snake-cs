@@ -24,6 +24,12 @@ namespace Snake.UI {
         public abstract void Update();
 
         public abstract void Draw(Screen screen);
+
+        protected void FireChangeContext(ChangeContextEventArgs e) {
+            if (this.OnChangeContext != null) {
+                this.OnChangeContext(this, e);
+            }
+        }
     }
 }
 
