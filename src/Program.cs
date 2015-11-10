@@ -6,6 +6,8 @@ using Snake.UI;
 
 namespace Snake {
     public class Program {
+        private static Context currentContext;
+
         public static void Main(string[] args) {
             Logger.Instance = new Logger("log.txt");
 
@@ -33,13 +35,14 @@ namespace Snake {
             screen.DefaultForeground = ConsoleColor.White;
             screen.DefaultBackground = ConsoleColor.Black;
 
-            Game g = new Game(new Vector(screen.Width, screen.Height), new DifficultySettings(5, 10, 50));
+            Program.currentContext = new MainMenu(new Vector(screen.Width, screen.Height));
+            Program.currentContext.OnChangeContext += new ChangeContextEventHandler(Program.OnChangeContext);
 
             while (true) {
                 DateTime start = DateTime.Now;
                 UserInput.Update();
-                g.Update();
-                g.Draw(screen);
+                Program.currentContext.Update();
+                Program.currentContext.Draw(screen);
 
                 if (UserInput.KeyPressed) {
                     screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Blue);
@@ -60,6 +63,12 @@ namespace Snake {
                 if (timeout < 0) timeout = 0;
                 Thread.Sleep(timeout);
             }
+        }
+
+        private static void OnChangeContext(object sender, ChangeContextEventArgs e) {
+            Program.currentContext = e.NewContext;
+            Program.currentContext.Update();
+            Program.currentContext.OnChangeContext += new ChangeContextEventHandler(Program.OnChangeContext);
         }
     }
 }
