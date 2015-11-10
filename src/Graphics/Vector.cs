@@ -45,10 +45,11 @@ namespace Snake.Graphics {
         }
 
         public static bool operator ==(Vector v1, Vector v2) {
-            // A null Vector will never be equal to anything,
-            // Including another null Vector
-            if ((object)v1 == null || (object)v2 == null) return false;
-            else return v1.X == v2.X && v1.Y == v2.Y;
+            if ((object)v1 == null || (object)v2 == null) {
+                return (object)v1 == null && (object)v2 == null;
+            }
+
+            return v1.X == v2.X && v1.Y == v2.Y;
         }
 
         public static bool operator !=(Vector v1, Vector v2) {
