@@ -1,8 +1,13 @@
 OUT=snake.exe
+COMPILE=mcs -out:bin/$(OUT) -pkg:dotnet -recurse:'src/*.cs'
 
 all:
 	mkdir -p bin/
-	mcs -out:bin/$(OUT) -pkg:dotnet -recurse:'src/*.cs'
+	$(COMPILE)
+
+debug:
+	$(COMPILE) -debug
+	mono --debug bin/$(OUT)
 
 run: all
 	mono bin/$(OUT)
