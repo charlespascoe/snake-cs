@@ -44,13 +44,6 @@ namespace Snake {
                 Program.currentContext.Update();
                 Program.currentContext.Draw(screen);
 
-                if (UserInput.KeyPressed) {
-                    screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Blue);
-                    screen.SetCell(2, 0, (int)UserInput.KeyChar == 0 ? '0' : ' ', ConsoleColor.White, ConsoleColor.Blue);
-                    screen.SetCell(1, 0, UserInput.Key == ConsoleKey.Enter ? '#' : ' ', ConsoleColor.White, ConsoleColor.Black);
-                } else {
-                    screen.SetCell(0, 0, UserInput.KeyChar, ConsoleColor.White, ConsoleColor.Black);
-                }
 
                 TimeSpan t1 = DateTime.Now - start;
                 screen.Draw();
