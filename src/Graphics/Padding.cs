@@ -7,6 +7,8 @@ namespace Snake.Graphics {
         public int Bottom { get; private set; }
         public int Left { get; private set; }
 
+        public Padding() : this(0, 0, 0, 0) {}
+
         public Padding(int top, int right, int bottom, int left) {
             this.Top = top < 0 ? 0 : top;
             this.Right = right < 0 ? 0 : right;
@@ -15,7 +17,10 @@ namespace Snake.Graphics {
         }
 
         public static bool operator ==(Padding p1, Padding p2) {
-            if ((object)p1 == null || (object)p2 == null) return false;
+            if ((object)p1 == null || (object)p2 == null) {
+                return (object)p1 == null && (object)p2 == null;
+            }
+
             return
                 p1.Top == p2.Top &&
                 p1.Right == p2.Right &&
