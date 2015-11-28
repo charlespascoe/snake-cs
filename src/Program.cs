@@ -25,6 +25,8 @@ namespace Snake {
 
         private static void OnQuit(object sender, ConsoleCancelEventArgs e) {
                 Console.CursorVisible = true;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
                 Console.Clear();
                 Logger.Flush();
                 Logger.Close();
