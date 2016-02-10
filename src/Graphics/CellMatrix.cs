@@ -75,7 +75,7 @@ namespace Snake.Graphics {
             }
         }
 
-        protected void SetCells(Vector position, Cell[,] cells) {
+        public void SetCells(Vector position, Cell[,] cells) {
             int cellsWidth = cells.GetLength(0);
             int cellsHeight = cells.GetLength(1);
 
