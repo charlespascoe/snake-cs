@@ -46,7 +46,7 @@ namespace Snake {
             if (!this.IsFocussed) return;
 
             base.Draw(screen, parentPos);
-            screen.WriteString(parentPos + this.Position + new Vector(1, 1), "Paused".Center(this.Size.X - 2));
+            screen.DrawString(parentPos + this.Position + new Vector(1, 1), "Paused".Center(this.Size.X - 2));
             this.layout.Draw(screen, parentPos + this.Position);
         }
 
