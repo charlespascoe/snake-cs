@@ -61,16 +61,31 @@ namespace Snake.Graphics {
             }
         }
 
-        // public void SetCells(Vector position, Cell[,] cells) {
-        //     for (int x = 0; x < cells.GetLength(0); x++) {
-        //         for (int y = 0; y < cells.GetLength(1); y++) {
-        //             if (x >= 0 && x < this.Size.X && y >= 0 && y < this.Size.Y) {
-        //                 Cell cell = this.cells[x, y];
+        protected void SetCells(Vector position, Cell[,] cells) {
+            int cellsWidth = cells.GetLength(0);
+            int cellsHeight = cells.GetLength(1);
 
-        //             }
-        //         }
-        //     }
-        // }
+            for (int x = 0; x < cellsWidth; x++) {
+                int i = x + position.X;
+
+                if (i < 0 || i >= this.Size.X) continue;
+
+                for (int y = 0; y < cellsHeight; y++) {
+                    int j = y + position.Y;
+
+                    if (j < 0 || j >= this.Size.Y) continue;
+
+                    Cell newCell = cells[x, y];
+
+                    if ((int)newCell.Character == 0) continue;
+
+                    Cell cell = this.cells[i, j];
+                    cell.Character = newCell.Character;
+                    cell.Background = newCell.Background;
+                    cell.Foreground = newCell.Foreground;
+                }
+            }
+        }
 
         public void DrawString(Vector position, String text) {
             foreach (char c in text) {
