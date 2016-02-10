@@ -6,14 +6,28 @@ namespace Snake.Graphics {
 
         public Vector Size { get; private set; }
 
+        public char DefaultChar { get; set; }
+        public ConsoleColor DefaultForeground { get; set; }
+        public ConsoleColor DefaultBackground { get; set; }
+
+        public CellMatrix(Vector size) : this(size, (char)0, ConsoleColor.White, ConsoleColor.Black) { }
+
         public CellMatrix(Vector size, char defaultChar, ConsoleColor defaultForeground, ConsoleColor defaultBackground) {
+            this.DefaultChar = defaultChar;
+            this.DefaultForeground = defaultForeground;
+            this.DefaultBackground = defaultBackground;
+
             this.Size = size;
 
             this.cells = new Cell[size.X, size.Y];
 
-            for (int x = 0; x < size.X; x++) {
-                for (int y = 0; y < size.Y; y++) {
-                    this.cells[x, y] = new Cell(defaultChar, defaultForeground, defaultBackground);
+            this.Clear();
+        }
+
+        public void Clear() {
+            for (int x = 0; x < this.Size.X; x++) {
+                for (int y = 0; y < this.Size.Y; y++) {
+                    this.cells[x, y] = new Cell(this.DefaultChar, this.DefaultForeground, this.DefaultBackground);
                 }
             }
         }
