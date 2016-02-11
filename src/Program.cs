@@ -34,8 +34,6 @@ namespace Snake {
 
         public static void RunGame() {
             Screen screen = new Screen();
-            screen.DefaultForeground = ConsoleColor.White;
-            screen.DefaultBackground = ConsoleColor.Black;
 
             Program.currentContext = new MainMenu(screen.Size);
             Program.currentContext.OnChangeContext += Program.OnChangeContext;
@@ -54,8 +52,9 @@ namespace Snake {
 
                 int timeout = 25 - t2.Milliseconds;
 
-                if (timeout < 0) timeout = 0;
-                Thread.Sleep(timeout);
+                if (timeout > 0) {
+                    Thread.Sleep(timeout);
+                }
             }
         }
 
