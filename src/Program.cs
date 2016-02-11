@@ -37,7 +37,7 @@ namespace Snake {
             screen.DefaultForeground = ConsoleColor.White;
             screen.DefaultBackground = ConsoleColor.Black;
 
-            Program.currentContext = new MainMenu(new Vector(screen.Size.X, screen.Size.Y));
+            Program.currentContext = new MainMenu(screen.Size);
             Program.currentContext.OnChangeContext += Program.OnChangeContext;
 
             while (true) {
