@@ -8,21 +8,18 @@ namespace Snake.Graphics {
             set { Console.CursorVisible = value; }
         }
 
-        public int Width { get; private set; }
-
-        public int Height { get; private set; }
-
-
         // Subtract 1, because when the cursor writes the last line,
         // it will go to the next line, pushing everything up by 1
-        public Screen() : base(new Vector(Console.WindowWidth, Console.WindowHeight - 1), ' ', ConsoleColor.White, ConsoleColor.Black) { }
+        public Screen() : base(new Vector(Console.WindowWidth, Console.WindowHeight - 1), ' ', ConsoleColor.White, ConsoleColor.Black) {
+            this.CursorVisible = false;
+        }
 
         private int drawChangedThreshold = 1000;
 
         public int GetChangedCount() {
             int changed = 0;
-            for (int x = 0; x < this.Width; x++) {
-                for (int y = 0; y < this.Height; y++) {
+            for (int x = 0; x < this.Size.X; x++) {
+                for (int y = 0; y < this.Size.Y; y++) {
                     if (this.cells[x, y].HasChanged) {
                         changed++;
                     }
@@ -39,8 +36,8 @@ namespace Snake.Graphics {
             Console.ForegroundColor = this.cells[0, 0].Foreground;
             Console.BackgroundColor = this.cells[0, 0].Background;
 
-            for (int y = 0; y < this.Height; y++) {
-                for (int x = 0; x < this.Width; x++) {
+            for (int y = 0; y < this.Size.Y; y++) {
+                for (int x = 0; x < this.Size.X; x++) {
                     Cell cell = this.cells[x, y];
 
                     if (cell.Foreground != Console.ForegroundColor || cell.Background != Console.BackgroundColor) {
@@ -55,7 +52,7 @@ namespace Snake.Graphics {
                     cell.AfterDraw();
                 }
 
-                if (y < this.Height - 1) {
+                if (y < this.Size.Y - 1) {
                     writeBuffer.Add('\n');
                 }
             }
@@ -69,8 +66,8 @@ namespace Snake.Graphics {
                 return;
             }
 
-            for (int y = 0; y < this.Height; y++) {
-                for (int x = 0; x < this.Width; x++) {
+            for (int y = 0; y < this.Size.Y; y++) {
+                for (int x = 0; x < this.Size.X; x++) {
                     Cell cell = this.cells[x, y];
                     if (cell.HasChanged) {
                         Console.ForegroundColor = cell.Foreground;
