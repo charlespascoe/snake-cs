@@ -24,12 +24,12 @@ namespace Snake {
         }
 
         private static void OnQuit(object sender, ConsoleCancelEventArgs e) {
-                Console.CursorVisible = true;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.Clear();
-                Logger.Flush();
-                Logger.Close();
+            Console.CursorVisible = true;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Logger.Flush();
+            Logger.Close();
         }
 
         public static void RunGame() {
@@ -45,7 +45,6 @@ namespace Snake {
                 UserInput.Update();
                 Program.currentContext.Update();
                 Program.currentContext.Draw(screen);
-
 
                 TimeSpan t1 = DateTime.Now - start;
                 screen.Draw();
