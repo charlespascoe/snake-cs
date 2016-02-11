@@ -11,7 +11,7 @@ namespace Snake {
         public static void Main(string[] args) {
             Logger.Instance = new Logger("log.txt");
 
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(Program.OnQuit);
+            Console.CancelKeyPress += Program.OnQuit;
 
             try {
                 Program.RunGame();
@@ -38,7 +38,7 @@ namespace Snake {
             screen.DefaultBackground = ConsoleColor.Black;
 
             Program.currentContext = new MainMenu(new Vector(screen.Size.X, screen.Size.Y));
-            Program.currentContext.OnChangeContext += new ChangeContextEventHandler(Program.OnChangeContext);
+            Program.currentContext.OnChangeContext += Program.OnChangeContext;
 
             while (true) {
                 DateTime start = DateTime.Now;
@@ -61,9 +61,10 @@ namespace Snake {
         }
 
         private static void OnChangeContext(object sender, ChangeContextEventArgs e) {
+            Program.currentContext.OnChangeContext -= Program.OnChangeContext;
             Program.currentContext = e.NewContext;
             Program.currentContext.Update();
-            Program.currentContext.OnChangeContext += new ChangeContextEventHandler(Program.OnChangeContext);
+            Program.currentContext.OnChangeContext += Program.OnChangeContext;
         }
     }
 }
