@@ -13,7 +13,7 @@ namespace Snake {
         public override void Draw(Screen screen, Vector parentPos) {
             base.Draw(screen, parentPos);
 
-            screen.WriteString(parentPos + this.Position + new Vector(1, 1), this.Score.ToString().LeftPad('0', 2).Center(this.Size.X - 2));
+            screen.DrawString(parentPos + this.Position + new Vector(1, 1), this.Score.ToString().LeftPad('0', 2).Center(this.Size.X - 2));
         }
     }
 }

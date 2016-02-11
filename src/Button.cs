@@ -71,7 +71,7 @@ namespace Snake {
                 visibleText = ' ' + visibleText + ' ';
             }
 
-            screen.WriteString(parentPos + this.Position + textPosition, visibleText);
+            screen.DrawString(parentPos + this.Position + textPosition, visibleText);
         }
     }
 }
