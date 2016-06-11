@@ -36,21 +36,13 @@ namespace Snake.Graphics {
         }
 
 
-        private Vector _Position;
-        public Vector Position {
-            get { return this._Position; }
-            set {
-                if (value != null && value != this._Position) {
-                    this._Position = value;
-                }
-            }
-        }
+        public Vector Position { get; set; }
 
         private Vector _Size;
         public Vector Size {
             get { return this._Size; }
             set {
-                if (value != null && value != this._Size) {
+                if (value != this._Size) {
                     this._Size = value;
                     this.CalculateChildLayout();
                 }
@@ -71,19 +63,20 @@ namespace Snake.Graphics {
 
         public Container(
                 IPositionable child,
-                Vector position = null,
-                Vector size = null,
+                Vector? position = null,
+                Vector? size = null,
                 HorizontalPosition horizontalPos = HorizontalPosition.Default,
                 VerticalPosition verticalPos = VerticalPosition.Default,
                 Padding padding = null) {
 
             this.child = child;
-            this._ContainerPadding = padding != null ? padding : new Padding();
-            this._Size = size != null ? size : new Vector(
+            this._ContainerPadding = padding ?? new Padding();
+            this._Size = size ?? new Vector(
                 this.child.Size.X  + this.ContainerPadding.Left + this.ContainerPadding.Right,
                 this.child.Size.Y + this.ContainerPadding.Top + this.ContainerPadding.Bottom
             );
-            this._Position = (position != null ? position : new Vector());
+
+            this.Position = (position ?? new Vector());
             this._Horizontal = horizontalPos;
             this._Vertical = verticalPos;
             this.CalculateChildLayout();

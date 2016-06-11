@@ -1,17 +1,18 @@
 using System;
 
 namespace Snake.Graphics {
-    public class Vector {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+    public struct Vector {
+        private readonly int x;
+        private readonly int y;
 
-        public Vector() : this(0, 0) {}
+        public int X => this.x;
+        public int Y => this.y;
 
         public Vector(Vector v) : this(v.X, v.Y) {}
 
         public Vector(int x, int y) {
-            this.X = x;
-            this.Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         public static Vector operator +(Vector v1, Vector v2) {
@@ -45,15 +46,20 @@ namespace Snake.Graphics {
         }
 
         public static bool operator ==(Vector v1, Vector v2) {
-            if ((object)v1 == null || (object)v2 == null) {
-                return (object)v1 == null && (object)v2 == null;
-            }
-
             return v1.X == v2.X && v1.Y == v2.Y;
         }
 
         public static bool operator !=(Vector v1, Vector v2) {
             return !(v1 == v2);
+        }
+
+        public override bool Equals(object o) {
+            if (!(o is Vector)) return false;
+            return this == (Vector)o;
+        }
+
+        public override int GetHashCode() {
+            return this.X ^ this.Y;
         }
 
         public override string ToString() {

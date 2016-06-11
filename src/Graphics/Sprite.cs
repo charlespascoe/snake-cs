@@ -2,15 +2,7 @@ using System;
 
 namespace Snake.Graphics {
     public class Sprite : CellMatrix, IPositionable {
-        private Vector _Position;
-        public Vector Position {
-            get { return this._Position; }
-            set {
-                if (value != null) {
-                    this._Position = value;
-                }
-            }
-        }
+        public Vector Position { get; set; }
 
         public new Vector Size {
             get { return base.Size; }
