@@ -1,26 +1,23 @@
-using System;
-
 namespace Snake.Graphics {
-    public class Padding {
-        public int Top { get; private set; }
-        public int Right { get; private set; }
-        public int Bottom { get; private set; }
-        public int Left { get; private set; }
+    public struct Padding {
+        private readonly int top;
+        private readonly int right;
+        private readonly int bottom;
+        private readonly int left;
 
-        public Padding() : this(0, 0, 0, 0) {}
+        public int Top { get { return this.top; } }
+        public int Right { get { return this.right; } }
+        public int Bottom { get { return this.bottom; } }
+        public int Left { get { return this.left; } }
 
         public Padding(int top, int right, int bottom, int left) {
-            this.Top = top < 0 ? 0 : top;
-            this.Right = right < 0 ? 0 : right;
-            this.Bottom = bottom < 0 ? 0 : bottom;
-            this.Left = left < 0 ? 0 : left;
+            this.top = top < 0 ? 0 : top;
+            this.right = right < 0 ? 0 : right;
+            this.bottom = bottom < 0 ? 0 : bottom;
+            this.left = left < 0 ? 0 : left;
         }
 
         public static bool operator ==(Padding p1, Padding p2) {
-            if ((object)p1 == null || (object)p2 == null) {
-                return (object)p1 == null && (object)p2 == null;
-            }
-
             return
                 p1.Top == p2.Top &&
                 p1.Right == p2.Right &&
@@ -30,6 +27,15 @@ namespace Snake.Graphics {
 
         public static bool operator !=(Padding p1, Padding p2) {
             return !(p1 == p2);
+        }
+
+        public override bool Equals(object o) {
+            if (!(o is Padding)) return false;
+            return this == (Padding)o;
+        }
+
+        public override int GetHashCode() {
+            return this.Top ^ this.Right ^ this.Bottom ^ this.Left;
         }
     }
 }

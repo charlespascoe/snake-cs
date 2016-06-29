@@ -53,7 +53,7 @@ namespace Snake.Graphics {
         public Padding ContainerPadding {
             get { return this._ContainerPadding; }
             set {
-                if (value != null && value != this._ContainerPadding) {
+                if (value != this._ContainerPadding) {
                     this._ContainerPadding = value;
                     this.CalculateChildLayout();
                 }
@@ -67,7 +67,7 @@ namespace Snake.Graphics {
                 Vector? size = null,
                 HorizontalPosition horizontalPos = HorizontalPosition.Default,
                 VerticalPosition verticalPos = VerticalPosition.Default,
-                Padding padding = null) {
+                Padding? padding = null) {
 
             this.child = child;
             this._ContainerPadding = padding ?? new Padding();
@@ -76,7 +76,7 @@ namespace Snake.Graphics {
                 this.child.Size.Y + this.ContainerPadding.Top + this.ContainerPadding.Bottom
             );
 
-            this.Position = (position ?? new Vector());
+            this.Position = position ?? new Vector();
             this._Horizontal = horizontalPos;
             this._Vertical = verticalPos;
             this.CalculateChildLayout();
