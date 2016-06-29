@@ -11,26 +11,17 @@ namespace Snake {
         public static void Main(string[] args) {
             Logger.Instance = new Logger("log.txt");
 
-            Console.CancelKeyPress += Program.OnQuit;
+            Console.CancelKeyPress += (sender, e) => Program.Quit();
 
             try {
                 Program.RunGame();
             } catch (Exception ex) {
                 Logger.Write("Error", ex.ToString());
             } finally {
-                Program.OnQuit(null, null);
+                Program.Quit(1);
             }
-
         }
 
-        private static void OnQuit(object sender, ConsoleCancelEventArgs e) {
-            Console.CursorVisible = true;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Clear();
-            Logger.Flush();
-            Logger.Close();
-        }
 
         public static void RunGame() {
             Screen screen = new Screen();
@@ -63,6 +54,16 @@ namespace Snake {
             Program.currentContext = e.NewContext;
             Program.currentContext.Update();
             Program.currentContext.OnChangeContext += Program.OnChangeContext;
+        }
+
+        public static void Quit(int exitCode = 0) {
+            Console.CursorVisible = true;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Logger.Flush();
+            Logger.Close();
+            Environment.Exit(exitCode);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Snake {
             Button startBtn = new Button("Start");
             Button quitBtn = new Button("Quit");
 
-            startBtn.OnClick += new EventHandler(this.OnStartClick);
+            startBtn.OnClick += this.OnStartClick;
+            quitBtn.OnClick += (sender, e) => Program.Quit();
 
             vl.AddChild(startBtn);
             vl.AddChild(quitBtn);
