@@ -1,4 +1,3 @@
-using System;
 using Snake.Graphics;
 
 namespace Snake.UI {

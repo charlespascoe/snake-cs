@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Snake.Graphics;
 
 namespace Snake.UI {
     public class VerticalLayout : Layout {
-
-        public VerticalLayout(Vector position, Vector size) : base(position, size) {}
-
         private int _Spacing = 0;
         public int Spacing {
             get { return this._Spacing; }
@@ -17,6 +12,8 @@ namespace Snake.UI {
                 }
             }
         }
+
+        public VerticalLayout(Vector position, Vector size) : base(position, size) {}
 
         protected override void CalculateChildLayouts() {
             int yPos = 0;
