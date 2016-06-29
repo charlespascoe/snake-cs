@@ -24,8 +24,8 @@ namespace Snake {
             Button b2 = new Button("Test 2");
             Button b3 = new Button("Test 3");
 
-            b1.OnClick += new EventHandler(this.HandleB1Click);
-            b2.OnClick += new EventHandler(this.HandleB2Click);
+            b1.OnClick += this.HandleB1Click;
+            b2.OnClick += this.HandleB2Click;
 
             this.layout.AddChild(b1);
             this.layout.AddChild(b2);

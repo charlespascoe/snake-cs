@@ -19,7 +19,7 @@ namespace Snake.UI {
 
         public void AddChild(IFocusable child) {
             if (!this.elements.Contains(child)) {
-                child.OnBlur += new BlurEventHander(this.HandleElementBlur);
+                child.OnBlur += this.HandleElementBlur;
                 this.elements.Add(child);
             }
         }

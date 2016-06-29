@@ -16,7 +16,7 @@ namespace Snake {
             Vector scoreBoxSize = new Vector(8, 3);
 
             this.gameArea = new GameArea(new Vector(), verticalLayout.Size - new Vector(0, 5), settings);
-            this.gameArea.OnScoreChange += new EventHandler(this.OnScoreChange);
+            this.gameArea.OnScoreChange += this.OnScoreChange;
 
             this.scoreBox = new ScoreBox(new Vector(), scoreBoxSize);
 
@@ -28,7 +28,7 @@ namespace Snake {
             Vector pauseMenuSize = new Vector(16, 12);
             Vector pauseMenuPos = verticalLayout.Position + this.gameArea.Position + (this.gameArea.Size - pauseMenuSize) / 2;
             this.pauseMenu = new PauseMenu(pauseMenuPos, pauseMenuSize);
-            this.pauseMenu.OnResume += new EventHandler(this.OnResume);
+            this.pauseMenu.OnResume += this.OnResume;
         }
 
         public override void Update() {

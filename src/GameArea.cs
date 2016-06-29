@@ -32,8 +32,8 @@ namespace Snake {
             this.GameAreaSize = new Vector((this.background.Size.X - 2) / 2, this.background.Size.Y - 2);
 
             this.snake = new SnakeBody(this.settings.StartSpeed, this.GameAreaSize);
-            this.snake.OnMove += new EventHandler(this.OnSnakeMove);
-            this.snake.OnDeath += new EventHandler(this.OnSnakeDeath);
+            this.snake.OnMove += this.OnSnakeMove;
+            this.snake.OnDeath += this.OnSnakeDeath;
 
             this.entities = new List<GameEntity>();
 
