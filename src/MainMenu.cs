@@ -10,21 +10,23 @@ namespace Snake {
         private Lense lense = new Lense();
 
         public MainMenu(Vector screenSize) : base(screenSize) {
-            VerticalLayout vl = new VerticalLayout(new Vector(), new Vector(32, 16));
-
             Button startBtn = new Button("Start");
             Button quitBtn = new Button("Quit");
 
             startBtn.OnClick += this.OnStartClick;
             quitBtn.OnClick += (sender, e) => Program.Quit();
 
-            vl.AddChild(startBtn);
-            vl.AddChild(quitBtn);
-
             this.lense.AddChild(startBtn);
             this.lense.AddChild(quitBtn);
 
-            this.elements.Add(new Container(vl, size: screenSize, horizontalPos: HorizontalPosition.Center, verticalPos: VerticalPosition.Center));
+            this.elements.Add(
+                new Container(size: screenSize, horizontalPos: HorizontalPosition.Center, verticalPos: VerticalPosition.Center, child:
+                    new VerticalLayout(new Vector(), new Vector(32, 16)).Children(
+                        startBtn,
+                        quitBtn
+                    )
+                )
+            );
 
             this.lense.Focus();
         }

@@ -42,6 +42,12 @@ namespace Snake.UI {
         }
 
         protected abstract void CalculateChildLayouts();
+
+        public Layout Children(params IPositionable[] children) {
+            this.children = new List<IPositionable>(children);
+            this.CalculateChildLayouts();
+            return this;
+        }
     }
 }
 
