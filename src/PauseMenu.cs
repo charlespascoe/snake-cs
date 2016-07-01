@@ -4,7 +4,7 @@ using Snake.UI;
 
 namespace Snake {
     public class PauseMenu : Box, IFocusable  {
-        private VerticalLayout layout;
+        private Layout layout;
         private Lense lense;
 
         public event BlurEventHander OnBlur;
@@ -17,23 +17,22 @@ namespace Snake {
 
             this.lense = new Lense();
 
-            this.layout = new VerticalLayout(new Vector(1, 2), new Vector(this.Size) - new Vector(2, 2));
-            this.layout.Spacing = 0;
-
-            Button b1 = new Button("Resume");
+            Button resumeBtn = new Button("Resume");
             Button b2 = new Button("Test 2");
-            Button b3 = new Button("Test 3");
+            Button quitBtn = new Button("Quit");
 
-            b1.OnClick += this.HandleB1Click;
-            b2.OnClick += this.HandleB2Click;
+            resumeBtn.OnClick += (sender, e) => this.OnResume?.Invoke(this, EventArgs.Empty);
+            quitBtn.OnClick += (sender, e) => Program.Quit();
 
-            this.layout.AddChild(b1);
-            this.layout.AddChild(b2);
-            this.layout.AddChild(b3);
+            this.layout = new VerticalLayout(position: new Vector(1, 2), size: this.Size - new Vector(2, 2)).Children(
+                resumeBtn,
+                b2,
+                quitBtn
+            );
 
-            this.lense.AddChild(b1);
+            this.lense.AddChild(resumeBtn);
             this.lense.AddChild(b2);
-            this.lense.AddChild(b3);
+            this.lense.AddChild(quitBtn);
 
             this.lense.Focus();
         }
@@ -52,27 +51,17 @@ namespace Snake {
 
         public void Focus() {
             this.IsFocussed = true;
+            this.lense.Focus();
         }
 
         public void Blur(BlurEventArgs e = null) {
             this.IsFocussed = false;
+            this.lense.Blur();
 
             if (e != null && this.OnBlur != null) {
                 this.OnBlur(this, e);
             }
         }
-
-        private void HandleB1Click(object sender, EventArgs e) {
-            if (this.OnResume != null) {
-                this.OnResume(this, EventArgs.Empty);
-            }
-        }
-
-        private void HandleB2Click(object sender, EventArgs e) {
-            Logger.Write("PauseMenu", "B2 Click!");
-        }
-
-
     }
 }
 
