@@ -1,8 +1,15 @@
 using System;
 
 public struct Colour {
-    public static readonly Colour White = new Colour(5, 5, 5);
     public static readonly Colour Black = new Colour(0, 0, 0);
+    public static readonly Colour Blue = new Colour(0, 0, 5);
+    public static readonly Colour Cyan = new Colour(0, 5, 5);
+    public static readonly Colour Green = new Colour(0, 5, 0);
+    public static readonly Colour Magenta = new Colour(5, 0, 5);
+    public static readonly Colour Red = new Colour(5, 0, 0);
+    public static readonly Colour White = new Colour(5, 5, 5);
+    public static readonly Colour Yellow = new Colour(5, 5, 0);
+
 
     public byte R { get; private set; }
     public byte G { get; private set; }
