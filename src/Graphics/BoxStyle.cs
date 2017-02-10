@@ -9,18 +9,18 @@ namespace Snake.Graphics {
         public virtual char HorizontalBar { get { return ' '; } }
         public virtual char VerticalBar { get { return ' '; } }
 
-        public ConsoleColor Foreground { get; set; }
-        public ConsoleColor Background { get; set; }
-        public ConsoleColor BorderForeground { get; set; }
-        public ConsoleColor BorderBackground { get; set; }
+        public Colour Foreground { get; set; }
+        public Colour Background { get; set; }
+        public Colour BorderForeground { get; set; }
+        public Colour BorderBackground { get; set; }
 
         public bool HasBorder { get; set; }
 
         public BoxStyle() {
-            this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.Black;
-            this.BorderForeground = ConsoleColor.White;
-            this.BorderBackground = ConsoleColor.Black;
+            this.Foreground = Colour.White;
+            this.Background = Colour.Black;
+            this.BorderForeground = Colour.White;
+            this.BorderBackground = Colour.Black;
             this.HasBorder = true;
         }
     }
