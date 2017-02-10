@@ -7,12 +7,12 @@ namespace Snake.Graphics {
         public Vector Size { get; private set; }
 
         public char DefaultChar { get; set; }
-        public ConsoleColor DefaultForeground { get; set; }
-        public ConsoleColor DefaultBackground { get; set; }
+        public Colour DefaultForeground { get; set; }
+        public Colour DefaultBackground { get; set; }
 
-        public CellMatrix(Vector size) : this(size, (char)0, ConsoleColor.White, ConsoleColor.Black) { }
+        public CellMatrix(Vector size) : this(size, (char)0, Colour.White, Colour.Black) { }
 
-        public CellMatrix(Vector size, char defaultChar, ConsoleColor defaultForeground, ConsoleColor defaultBackground) {
+        public CellMatrix(Vector size, char defaultChar, Colour defaultForeground, Colour defaultBackground) {
             this.DefaultChar = defaultChar;
             this.DefaultForeground = defaultForeground;
             this.DefaultBackground = defaultBackground;
@@ -32,23 +32,23 @@ namespace Snake.Graphics {
             }
         }
 
-        public void SetCell(Vector position, char c, ConsoleColor? foreground = null, ConsoleColor? background = null) {
+        public void SetCell(Vector position, char c, Colour? foreground = null, Colour? background = null) {
             if (position.X >= 0 && position.X < this.Size.X && position.Y >= 0 && position.Y < this.Size.Y) {
                 Cell cell = this.cells[position.X, position.Y];
 
                 cell.Character = c;
 
                 if (foreground != null) {
-                    cell.Foreground = (ConsoleColor)foreground;
+                    cell.Foreground = (Colour)foreground;
                 }
 
                 if (background != null) {
-                    cell.Background = (ConsoleColor)background;
+                    cell.Background = (Colour)background;
                 }
             }
         }
 
-        public void SetCells(Vector position, Vector size, char c, ConsoleColor? foregound = null, ConsoleColor? background = null) {
+        public void SetCells(Vector position, Vector size, char c, Colour? foregound = null, Colour? background = null) {
             if ((int)c == 0) return;
 
             for (int x = 0; x < size.X; x++) {
@@ -65,11 +65,11 @@ namespace Snake.Graphics {
                     cell.Character = c;
 
                     if (foregound != null) {
-                        cell.Foreground = (ConsoleColor)foregound;
+                        cell.Foreground = (Colour)foregound;
                     }
 
                     if (background != null) {
-                        cell.Background = (ConsoleColor)background;
+                        cell.Background = (Colour)background;
                     }
                 }
             }
