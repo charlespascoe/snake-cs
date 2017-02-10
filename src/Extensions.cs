@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using Snake.Graphics;
 
 namespace Snake {
@@ -55,6 +57,11 @@ namespace Snake {
         public static String RightPad(this string text, char padding, int length) {
             int addPadding = length - text.Length;
             return addPadding <= 0 ? text : text + new String(padding, addPadding);
+        }
+
+        public static void Write(this Stream strm, string str) {
+            byte[] data = Encoding.UTF8.GetBytes(str);
+            strm.Write(data, 0, data.Length);
         }
     }
 }
