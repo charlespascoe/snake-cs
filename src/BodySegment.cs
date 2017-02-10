@@ -14,7 +14,7 @@ namespace Snake {
             this.BodyCharRight = ' ';
             this.BodyCharLeft = ' ';
             this.Foreground = Colour.White;
-            this.Background = Colour.Cyan;
+            this.Background = new Colour(0, 3, 0);
             this.GamePosition = new Vector();
         }
 
@@ -29,7 +29,7 @@ namespace Snake {
         }
 
         public void Dead() {
-            this.Background = Colour.Magenta;
+            this.Background = new Colour(5, 0, 1);
         }
     }
 }

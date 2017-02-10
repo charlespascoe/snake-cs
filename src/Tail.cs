@@ -6,11 +6,11 @@ namespace Snake {
             this.BodyCharRight = ' ';
             this.BodyCharLeft = ' ';
             this.Foreground = Colour.White;
-            this.Background = Colour.Green;
+            this.Background = new Colour(0, 2, 0);
         }
 
         public void Dead() {
-            this.Background = Colour.Red;
+            this.Background = new Colour(5, 0, 0);
         }
     }
 }

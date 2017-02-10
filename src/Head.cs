@@ -14,7 +14,7 @@ namespace Snake {
         public Head() : base() {
             this.HeadDirection = Direction.Up;
             this.Foreground = Colour.White;
-            this.Background = Colour.Green;
+            this.Background = new Colour(0, 1, 0);
         }
 
         private void UpdateHeadDirection() {
@@ -40,7 +40,7 @@ namespace Snake {
         }
 
         public void Dead() {
-            this.Background = Colour.Red;
+            this.Background = new Colour(4, 0, 0);
         }
     }
 }
