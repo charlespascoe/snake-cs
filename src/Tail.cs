@@ -5,8 +5,8 @@ namespace Snake {
         public Tail() {
             this.BodyCharRight = ' ';
             this.BodyCharLeft = ' ';
-            this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.Green;
+            this.Foreground = Colour.White;
+            this.Background = Colour.Green;
         }
     }
 }
