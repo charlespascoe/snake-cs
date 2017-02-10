@@ -24,7 +24,7 @@ namespace Snake {
 
             this.background = new Box(new Vector(), this.Size);
             this.background.Style = new DoubleLineBoxStyle();
-            this.background.Style.BorderForeground = ConsoleColor.Blue;
+            this.background.Style.BorderForeground = Colour.Blue;
 
             this.settings = settings;
 
