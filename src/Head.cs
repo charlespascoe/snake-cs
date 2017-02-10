@@ -13,8 +13,8 @@ namespace Snake {
 
         public Head() : base() {
             this.HeadDirection = Direction.Up;
-            this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.Green;
+            this.Foreground = Colour.White;
+            this.Background = Colour.Green;
         }
 
         private void UpdateHeadDirection() {
