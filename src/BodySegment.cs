@@ -7,14 +7,14 @@ namespace Snake {
 
         public char BodyCharRight { get; set; }
         public char BodyCharLeft { get; set; }
-        public ConsoleColor Foreground { get; set; }
-        public ConsoleColor Background { get; set; }
+        public Colour Foreground { get; set; }
+        public Colour Background { get; set; }
 
         public BodySegment() {
             this.BodyCharRight = ' ';
             this.BodyCharLeft = ' ';
-            this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.Cyan;
+            this.Foreground = Colour.White;
+            this.Background = Colour.Cyan;
             this.GamePosition = new Vector();
         }
 
