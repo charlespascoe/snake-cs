@@ -3,12 +3,12 @@ using System;
 namespace Snake.Graphics {
     public class Cell {
         public char Character { get; set; }
-        public ConsoleColor Foreground { get; set; }
-        public ConsoleColor Background { get; set; }
+        public Colour Foreground { get; set; }
+        public Colour Background { get; set; }
 
         private char previousCharacter;
-        private ConsoleColor previousForeground;
-        private ConsoleColor previousBackground;
+        private Colour previousForeground;
+        private Colour previousBackground;
 
         public bool HasChanged {
             get {
@@ -19,13 +19,13 @@ namespace Snake.Graphics {
         }
 
         public Cell() {
-            this.Foreground = ConsoleColor.White;
-            this.Background = ConsoleColor.Black;
-            this.previousForeground = ConsoleColor.White;
-            this.previousBackground = ConsoleColor.Black;
+            this.Foreground = Colour.White;
+            this.Background = Colour.Black;
+            this.previousForeground = Colour.White;
+            this.previousBackground = Colour.Black;
         }
 
-        public Cell(char c, ConsoleColor f, ConsoleColor b) {
+        public Cell(char c, Colour f, Colour b) {
            this.Character = c;
            this.Foreground = f;
            this.Background = b;
