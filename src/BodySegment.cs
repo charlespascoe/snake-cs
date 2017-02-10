@@ -27,6 +27,10 @@ namespace Snake {
             screen.SetCell(screenPosition, this.BodyCharLeft, this.Foreground, this.Background);
             screen.SetCell(screenPosition + new Vector(1, 0), this.BodyCharRight, this.Foreground, this.Background);
         }
+
+        public void Dead() {
+            this.Background = Colour.Magenta;
+        }
     }
 }
 

@@ -38,6 +38,10 @@ namespace Snake {
                     break;
             }
         }
+
+        public void Dead() {
+            this.Background = Colour.Red;
+        }
     }
 }
 

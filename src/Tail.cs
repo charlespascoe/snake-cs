@@ -8,6 +8,10 @@ namespace Snake {
             this.Foreground = Colour.White;
             this.Background = Colour.Green;
         }
+
+        public void Dead() {
+            this.Background = Colour.Red;
+        }
     }
 }
 

@@ -104,11 +104,11 @@ namespace Snake {
             this.body.Insert(0, b);
 
             if (this.CollidesWithBody(this.head.GamePosition, false) && this.OnDeath != null) {
-                this.head.Background = Colour.Red;
-                this.tail.Background = Colour.Red;
+                this.head.Dead();
+                this.tail.Dead();
 
                 foreach (BodySegment bSeg in this.body) {
-                    bSeg.Background = Colour.Magenta;
+                    bSeg.Dead();
                 }
 
                 this.OnDeath(this, EventArgs.Empty);
