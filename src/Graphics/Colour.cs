@@ -46,4 +46,8 @@ public struct Colour {
     public override int GetHashCode() {
         return (this.R << 8 + this.G) << 8 + this.B;
     }
+
+    public override string ToString() {
+        return $"Colour {{ Red: {this.R}, Green: {this.G}, Blue: {this.B} }}";
+    }
 }
