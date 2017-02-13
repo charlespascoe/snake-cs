@@ -9,14 +9,18 @@ namespace Snake {
         private List<GameEntity> entities;
         private bool gameOver = false;
         private DifficultySettings settings;
+        private int ticksUntilNextFlash;
 
         public Vector Size { get; set; }
         public Vector GameAreaSize { get; private set; }
         public Vector Position { get; set; }
         public int Score { get; private set; }
         public bool Paused { get; set; }
+        public bool FlashBorder { get; set; }
 
         public event EventHandler OnScoreChange;
+
+        public event EventHandler OnDeath;
 
         public GameArea(Vector position, Vector size, DifficultySettings settings) {
             this.Position = new Vector(position);
@@ -49,6 +53,22 @@ namespace Snake {
 
             foreach (GameEntity entity in this.entities) {
                 entity.Update();
+            }
+
+            if (this.FlashBorder) {
+                this.ticksUntilNextFlash--;
+
+                if (this.ticksUntilNextFlash <= 0) {
+                    this.ticksUntilNextFlash = 10;
+
+                    if (this.background.Style.BorderForeground != Colour.Red) {
+                        this.background.Style.BorderForeground = Colour.Red;
+                    } else {
+                        this.background.Style.BorderForeground = Colour.White;
+                    }
+                }
+            } else {
+                this.background.Style.BorderForeground = Colour.Blue;
             }
 
             if (!this.gameOver) {
@@ -89,6 +109,9 @@ namespace Snake {
 
         private void OnSnakeDeath(object sender, EventArgs e) {
             this.gameOver = true;
+            this.FlashBorder = true;
+
+            this.OnDeath?.Invoke(this, EventArgs.Empty);
         }
 
         private bool CollidesWithEntity(Vector gamePosition) {
