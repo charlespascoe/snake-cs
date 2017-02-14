@@ -8,6 +8,7 @@ namespace Snake {
         private Lense lense;
 
         public event BlurEventHander OnBlur;
+        public event EventHandler OnRestart;
         public event EventHandler OnResume;
 
         public bool IsFocussed { get; private set; }
@@ -18,20 +19,21 @@ namespace Snake {
             this.lense = new Lense();
 
             Button resumeBtn = new Button("Resume");
-            Button b2 = new Button("Test 2");
+            Button restartBtn = new Button("Restart");
             Button quitBtn = new Button("Quit");
 
             resumeBtn.OnClick += (sender, e) => this.OnResume?.Invoke(this, EventArgs.Empty);
+            restartBtn.OnClick += (sender, e) => this.OnRestart?.Invoke(this, EventArgs.Empty);
             quitBtn.OnClick += (sender, e) => Program.Quit();
 
             this.layout = new VerticalLayout(position: new Vector(1, 2), size: this.Size - new Vector(2, 2)).Children(
                 resumeBtn,
-                b2,
+                restartBtn,
                 quitBtn
             );
 
             this.lense.AddChild(resumeBtn);
-            this.lense.AddChild(b2);
+            this.lense.AddChild(restartBtn);
             this.lense.AddChild(quitBtn);
 
             this.lense.Focus();
