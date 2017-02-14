@@ -5,6 +5,8 @@ using Snake.UI;
 
 namespace Snake {
     public class Game : Context {
+        private Vector screenSize;
+        private DifficultySettings settings;
         private List<IPositionable> layouts = new List<IPositionable>();
         private GameArea gameArea;
         private ScoreBox scoreBox;
@@ -14,6 +16,8 @@ namespace Snake {
         private GameOverPanel gameOverPanel;
 
         public Game(Vector screenSize, DifficultySettings settings) : base(screenSize) {
+            this.screenSize = screenSize;
+            this.settings = settings;
             VerticalLayout verticalLayout = new VerticalLayout(new Vector(8, 4), screenSize - new Vector(16, 8));
 
             Vector scoreBoxSize = new Vector(8, 3);
@@ -29,10 +33,12 @@ namespace Snake {
             // Pause Menu
             this.pauseMenu = new PauseMenu(new Vector(), new Vector(16, 12));
             this.pauseMenu.OnResume += this.OnResume;
+            this.pauseMenu.OnRestart += (sender, e) => this.Restart();
             stackLayout.AddChild(new Container(this.pauseMenu, horizontalPos: HorizontalPosition.Center, verticalPos: VerticalPosition.Center));
 
             // Game Over
             this.gameOverPanel = new GameOverPanel();
+            this.gameOverPanel.OnRestart += (sender, e) => this.Restart();
             stackLayout.AddChild(new Container(this.gameOverPanel, horizontalPos: HorizontalPosition.Center, verticalPos: VerticalPosition.Center));
 
             verticalLayout.AddChild(stackLayout);
@@ -80,6 +86,10 @@ namespace Snake {
 
         private void OnDeath(object sender, EventArgs e) {
             this.gameOver = true;
+        }
+
+        private void Restart() {
+            this.FireChangeContext(new ChangeContextEventArgs(new Game(this.screenSize, this.settings)));
         }
 
         private void OnResume(object sender, EventArgs e) {
